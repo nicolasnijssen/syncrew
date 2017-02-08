@@ -382,7 +382,9 @@ extension YTFViewController {
                 
                 self.view.frame.size.height = self.playerView.frame.height
                 
+            
                 UIApplication.shared.setStatusBarHidden(false, with: .fade)
+
         })
     }
     

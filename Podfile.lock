@@ -1,4 +1,5 @@
 PODS:
+  - Alamofire (4.3.0)
   - Firebase/Core (3.7.1):
     - FirebaseAnalytics (= 3.4.4)
     - FirebaseCore (= 3.4.3)
@@ -28,14 +29,18 @@ PODS:
   - GoogleSymbolUtilities (1.1.2)
   - GoogleUtilities (1.3.2):
     - GoogleSymbolUtilities (~> 1.1)
+  - JAYSON (0.6.1)
   - youtube-ios-player-helper (0.1.6)
 
 DEPENDENCIES:
+  - Alamofire (~> 4.3)
   - Firebase/Core
   - Firebase/Messaging
+  - JAYSON
   - youtube-ios-player-helper (~> 0.1.1)
 
 SPEC CHECKSUMS:
+  Alamofire: 856a113053a7bc9cbe5d6367a555d773fc5cfef7
   Firebase: be473484f0d515e72ffd04acf22f981773c23e58
   FirebaseAnalytics: 0533a00b681e08fd0b2cd0444b7ddf0ef9fd7a1a
   FirebaseCore: 5a885548bbc5f0c410b04f8e9ac9d73ff1221907
@@ -45,8 +50,9 @@ SPEC CHECKSUMS:
   GoogleIPhoneUtilities: 63f25e93a3ddcb66884d182aab3a660d98f1479b
   GoogleSymbolUtilities: 631ee17048aa5e9ab133470d768ea997a5ef9b96
   GoogleUtilities: 8bbc733218aad26306f9d4a253823986110e3358
+  JAYSON: 99750ff81031907ba915015b387d1ddaaa11eed9
   youtube-ios-player-helper: 21ab92db027c7ff86cb17a3843a3f6eafc8158d2
 
-PODFILE CHECKSUM: 6ac0448bdbfd2fb7ab3609e1d94960c68668522a
+PODFILE CHECKSUM: a9525d148ed8df9f54c2959720f3eff733c8dfd3
 
-COCOAPODS: 1.1.0.rc.2
+COCOAPODS: 1.2.0

@@ -10,15 +10,17 @@ import Foundation
 
 class Room: NSObject {
     
-    var name: String?
-    var type: RoomType?
-    var thumbnail: String?
+    var id:Int
+    var name: String
+    var thumbnail: String
+    var type: String
     
     
-    init(name:String, type:RoomType,thumbnail:String) {
+    init(id:Int,name:String,thumbnail:String, type:String) {
      
+        self.id = id
         self.name = name
-        self.type = type
         self.thumbnail = thumbnail
+        self.type = type
     }
 }

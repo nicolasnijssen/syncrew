@@ -9,13 +9,16 @@
 import UIKit
 
 class Video {
-    var name: String
-    var artist: String
-    var url: URL
+    var title: String
+    var thumbnail: String
+    var youtube: String
+    var playback: String
+
     
-    init(name: String, artist: String, url: URL) {
-        self.name = name
-        self.artist = artist
-        self.url = url
+    init(title: String, thumbnail: String, youtube: String, playback:String) {
+        self.title = title
+        self.thumbnail = thumbnail
+        self.youtube = youtube
+        self.playback = playback
     }
 }

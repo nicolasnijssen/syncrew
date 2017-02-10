@@ -7,7 +7,8 @@ target 'Syncrew' do
   pod 'Firebase/Core'
   pod 'Firebase/Messaging'
   pod "youtube-ios-player-helper", "~> 0.1.1"
-
+  pod 'JAYSON'
+  pod 'Alamofire', '~> 4.3' 
 
 
   # Pods for Syncrew

@@ -28,13 +28,13 @@
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fCU-qT-EoW">
-                        <rect key="frame" x="10" y="19" width="36.5" height="21"/>
+                        <rect key="frame" x="128" y="18" width="36.5" height="21"/>
                         <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Artist" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kNz-SU-PhD">
-                        <rect key="frame" x="10" y="41" width="33" height="20"/>
+                        <rect key="frame" x="128" y="40" width="33" height="20"/>
                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
@@ -42,13 +42,13 @@
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="bottom" secondItem="yxe-Xn-mGp" secondAttribute="bottom" constant="8" id="6ac-IE-yFv"/>
-                    <constraint firstItem="fCU-qT-EoW" firstAttribute="leading" secondItem="yxe-Xn-mGp" secondAttribute="trailing" constant="-110" id="BeC-ZF-Bcz"/>
+                    <constraint firstItem="fCU-qT-EoW" firstAttribute="leading" secondItem="yxe-Xn-mGp" secondAttribute="trailing" constant="8" id="BeC-ZF-Bcz"/>
                     <constraint firstItem="yxe-Xn-mGp" firstAttribute="leading" secondItem="mqR-cP-TwL" secondAttribute="leading" constant="10" id="Jsv-Vk-PGb"/>
                     <constraint firstItem="kNz-SU-PhD" firstAttribute="leading" secondItem="mqR-cP-TwL" secondAttribute="leadingMargin" constant="14" id="P0K-gI-Ku9"/>
                     <constraint firstItem="fCU-qT-EoW" firstAttribute="leading" secondItem="mqR-cP-TwL" secondAttribute="leadingMargin" constant="14" id="TeQ-tb-j9g"/>
-                    <constraint firstItem="fCU-qT-EoW" firstAttribute="top" secondItem="mqR-cP-TwL" secondAttribute="topMargin" constant="11" id="XSv-iC-jZz"/>
+                    <constraint firstItem="fCU-qT-EoW" firstAttribute="top" secondItem="mqR-cP-TwL" secondAttribute="topMargin" constant="10" id="XSv-iC-jZz"/>
                     <constraint firstItem="yxe-Xn-mGp" firstAttribute="top" secondItem="mqR-cP-TwL" secondAttribute="top" constant="8" id="krm-E9-9cz"/>
-                    <constraint firstItem="kNz-SU-PhD" firstAttribute="leading" secondItem="yxe-Xn-mGp" secondAttribute="trailing" constant="-110" id="kzP-bu-Xle"/>
+                    <constraint firstItem="kNz-SU-PhD" firstAttribute="leading" secondItem="yxe-Xn-mGp" secondAttribute="trailing" constant="8" id="kzP-bu-Xle"/>
                     <constraint firstItem="kNz-SU-PhD" firstAttribute="top" secondItem="fCU-qT-EoW" secondAttribute="bottom" constant="1" id="mpO-m6-hH5"/>
                     <constraint firstItem="yxe-Xn-mGp" firstAttribute="baseline" secondItem="kNz-SU-PhD" secondAttribute="baseline" constant="14" id="uah-fv-oG6"/>
                 </constraints>

@@ -9,10 +9,31 @@
 import UIKit
 
 class HomeViewController: UIViewController, UITableViewDataSource {
+   
+    @IBOutlet weak var table: UITableView!
+
     var headers = ["Public", "Private"]
+    var rooms = Array<Room>()
+    
+    let api = APICommunicator.instance
 
     
-    @IBOutlet weak var table: UITableView!
+    
+    override func viewWillAppear(_ animated: Bool) {
+        
+        if(api.rooms.count == 0){
+         //   print("ROOM COUNT \(api.rooms.count)")
+           // api.retrieveRooms()
+            print("ROOMS RETRIEVED")
+            api.retrieveVideos()
+        }
+
+        table.reloadData()
+        print("ROOM WILL COUNT \(api.rooms.count)")
+
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -20,8 +41,12 @@ class HomeViewController: UIViewController, UITableViewDataSource {
         
         table.backgroundColor = .clear
         table.separatorStyle = UITableViewCellSeparatorStyle.none
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        table.reloadData()
+
     }
+    
+   
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -62,7 +87,9 @@ class HomeViewController: UIViewController, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
         return 1
+        
     }
     
     
@@ -72,7 +99,7 @@ class HomeViewController: UIViewController, UITableViewDataSource {
             let cell = table.dequeueReusableCell(withIdentifier: "public") as! RowCategory
             cell.type = "public"
             
-            cell.backgroundColor = .clear
+            cell.backgroundColor = .red
             cell.selectionStyle = UITableViewCellSelectionStyle.none;
 
         
@@ -82,7 +109,7 @@ class HomeViewController: UIViewController, UITableViewDataSource {
         } else if indexPath.section == 1{
             let cell = table.dequeueReusableCell(withIdentifier: "private") as! RowCategory
             cell.type = "private"
-            cell.backgroundColor = .clear
+            cell.backgroundColor = .black
             cell.selectionStyle = UITableViewCellSelectionStyle.none;
 
             
@@ -91,7 +118,6 @@ class HomeViewController: UIViewController, UITableViewDataSource {
         }
         
         let cell =  UITableViewCell()
-        
         cell.backgroundColor = .clear
         cell.selectionStyle = UITableViewCellSelectionStyle.none;
 

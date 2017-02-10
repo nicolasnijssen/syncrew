@@ -21,6 +21,13 @@ class LoginViewController: UIViewController {
         self.navigationController?.navigationBar.isTranslucent = true
         self.navigationController?.view.backgroundColor = UIColor.clear
         
+        
+        print("LOGIN")
+        
+        APICommunicator.instance.retrieveRooms()
+        
+        
+        
     }
 
       override func didReceiveMemoryWarning() {

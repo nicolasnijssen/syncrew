@@ -7,31 +7,19 @@
 //
 
 import UIKit
+import Alamofire
+import JAYSON
 
 class HomeViewController: UIViewController, UITableViewDataSource {
    
     @IBOutlet weak var table: UITableView!
 
     var headers = ["Public", "Private"]
-    var rooms = Array<Room>()
     
     let api = APICommunicator.instance
 
-    
-    
-    override func viewWillAppear(_ animated: Bool) {
-        
-        if(api.rooms.count == 0){
-         //   print("ROOM COUNT \(api.rooms.count)")
-           // api.retrieveRooms()
-            print("ROOMS RETRIEVED")
-            api.retrieveVideos()
-        }
+    var rooms:Array<Room> = Array<Room>()
 
-        table.reloadData()
-        print("ROOM WILL COUNT \(api.rooms.count)")
-
-    }
     
     
     override func viewDidLoad() {
@@ -42,7 +30,16 @@ class HomeViewController: UIViewController, UITableViewDataSource {
         table.backgroundColor = .clear
         table.separatorStyle = UITableViewCellSeparatorStyle.none
         
-        table.reloadData()
+
+        DispatchQueue.main.async {
+            print("start")
+            self.api.retrieveRooms()
+            self.table.reloadData()
+            
+            print("reload")
+            
+    
+        }
 
     }
     
@@ -51,6 +48,30 @@ class HomeViewController: UIViewController, UITableViewDataSource {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+
+    
+    func retrieveRooms(){
+        
+        Alamofire.request("http://127.0.0.1:8000/api/rooms").responseJSON { response in
+            
+            if let json = response.result.value {
+                
+                let jayson = try! JAYSON(any:json)
+                
+                for var i in (0..<jayson.array!.count){
+                    
+                    let room:Room = Room(id: jayson[i]["id"].int!,name: jayson[i]["name"].string!, thumbnail: jayson[i]["thumbnail"].string!, type: jayson[i]["room_type"].string!)
+                    
+                    
+                    self.rooms.append(room)
+                    print("+1 Room count: \(self.rooms.count)")
+                    print("naam \(room.name)")
+                }
+                
+            }
+            
+        }
     }
 
     
@@ -78,6 +99,7 @@ class HomeViewController: UIViewController, UITableViewDataSource {
         return headers.count
 
     }
+    
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return headers[section]
     }
@@ -95,6 +117,7 @@ class HomeViewController: UIViewController, UITableViewDataSource {
     
     func tableView(_ cellForRowAttableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
+        print("AANTAL ROOMS: \(self.api.rooms.count)")
         if indexPath.section == 0 {
             let cell = table.dequeueReusableCell(withIdentifier: "public") as! RowCategory
             cell.type = "public"
@@ -118,7 +141,7 @@ class HomeViewController: UIViewController, UITableViewDataSource {
         }
         
         let cell =  UITableViewCell()
-        cell.backgroundColor = .clear
+        cell.backgroundColor = .blue
         cell.selectionStyle = UITableViewCellSelectionStyle.none;
 
         

@@ -32,7 +32,7 @@ public struct YTFPlayer {
     public static func showYTFView(_ viewController: UIViewController) {
         if dragViewController!.isOpen == false {
             dragViewController!.view.frame = CGRect(x: viewController.view.frame.size.width, y: viewController.view.frame.size.height, width: viewController.view.frame.size.width, height: viewController.view.frame.size.height)
-            dragViewController!.view.alpha = 0
+            dragViewController!.view.alpha = 1
             dragViewController!.view.transform = CGAffineTransform(scaleX: 0.2, y: 0.2)
             dragViewController!.onView = viewController.view
             

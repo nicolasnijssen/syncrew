@@ -9,6 +9,21 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>ChameleonFramework.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>GTMSessionFetcher.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>GoogleToolboxForMac.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>JAYSON.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -29,6 +44,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Protobuf.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>youtube-ios-player-helper.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -37,7 +57,17 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>0B002E06A8AFD38AEF41BD349C6FA5A3</key>
+		<key>6C866F05C8959A538BA561EC6ABF849D</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>6D5CEDECD3D8DC52EA507E0431BDA8A0</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>76BD4592010354D6C23D6ECCA20D83A8</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -52,17 +82,27 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>C052BEBFBD0AB5218CC64BA3450F6547</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>C8A2F3743C31C103B865DFA23CAB3F34</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>C99516600EAF7DAEFFBCC89D852F125A</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>EF13C1927D396CCD0546BD67ACE1764E</key>
+		<key>CC1ED7E9B34650E522599997EBFEBD34</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>F6A1E0B41D38F4AE66DC118E54FE0F31</key>
+		<key>EF13C1927D396CCD0546BD67ACE1764E</key>
 		<dict>
 			<key>primary</key>
 			<true/>

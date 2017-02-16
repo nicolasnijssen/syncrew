@@ -43,6 +43,7 @@ extension YTFViewController {
     
     func playIndex(_ index: Int) {
         print("Index \(index)")
+        print("URLS COUNT \(urls!.count)")
         playerView.url = urls![index]
         playerView.play()
         progressIndicatorView.isHidden = false
@@ -72,6 +73,8 @@ extension YTFViewController: PlayerViewDelegate {
         playerTapGesture = UITapGestureRecognizer(target: self, action: #selector(YTFViewController.showPlayerControls))
         playerView.addGestureRecognizer(playerTapGesture!)
         print("Ready to Play")
+        self.playerView.isHidden = false
+        self.playerView.alpha = 1.0
         self.playerView.play()
     }
     

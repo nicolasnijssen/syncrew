@@ -22,12 +22,7 @@ class APICommunicator: NSObject {
     var privRooms:Array<Room> = Array<Room>()
 
     let errorRoom = Room(id: 9999999, name: "ERROR", thumbnail: "ERROR", type: "ERROR")
-    
-    func authenticate()-> Bool {
-        
-        return true
-    }
-    
+
   
     
     func retrieveRooms(){

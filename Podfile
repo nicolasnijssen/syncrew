@@ -6,10 +6,13 @@ target 'Syncrew' do
   use_frameworks!
   pod 'Firebase/Core'
   pod 'Firebase/Messaging'
+  pod 'Firebase/Database'
+  pod 'Firebase/Auth'
+  pod 'Firebase/Storage'
   pod "youtube-ios-player-helper", "~> 0.1.1"
   pod 'JAYSON'
-  pod 'Alamofire', '~> 4.3' 
-
+  pod 'Alamofire', '~> 4.3'
+  pod 'ChameleonFramework/Swift', :git => 'https://github.com/ViccAlexander/Chameleon.git'
 
   # Pods for Syncrew
 

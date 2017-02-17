@@ -7,20 +7,13 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
 
     
     @IBOutlet weak var tableview:UITableView!
-    
+    @IBOutlet weak var scrollView: UIScrollView!
+
     var headers = ["Public","Private"]
 
-    
-    @IBOutlet weak var scrollView: UIScrollView!
     var guttlerPageControl: GuttlerPageControl!
     let numOfpage = 7
 
-    
-    let model = generateRandomData()
-    var storedOffsets = [Int: CGFloat]()
-    
-    let api = APICommunicator.instance
-    var rooms:Array<Room> = Array<Room>()
     var pubRooms:Array<Room> = Array<Room>()
     var privRooms:Array<Room> = Array<Room>()
 
@@ -29,14 +22,25 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         
         super.viewDidLoad()
         
+
+        self.title = "Syncrew"
+        
+        let rightBtn = UIButton(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
+        rightBtn.setImage(UIImage(named: "profile pic"), for: UIControlState.normal)
+        
+        rightBtn.addTarget(self, action: #selector(self.showProfile), for:  UIControlEvents.touchUpInside)
+        
+        let item = UIBarButtonItem(customView: rightBtn)
+        
+        self.navigationItem.rightBarButtonItem = item
+
+        
         self.view.backgroundColor = UIColor(hexString: "#FEFEFE")
         
-        
-        self.tableview.backgroundColor = .clear
+        self.tableview.backgroundColor = UIColor(hexString: Constants.themeColor2)
         self.tableview.separatorStyle = UITableViewCellSeparatorStyle.none
 
         
-        /* PAGE CONTROL */
         let pageSize = self.scrollView.frame.width
         
         scrollView.contentSize = CGSize(width: pageSize * CGFloat(numOfpage), height: scrollView.frame.height)
@@ -54,30 +58,27 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         
         view.addSubview(scrollView)
         
-        // Just init with position and numOfpage
         guttlerPageControl = GuttlerPageControl(center: CGPoint(x: self.scrollView.center.x, y: self.scrollView.center.y+110), pages: numOfpage)
-        // Must bind pageControl with the scrollView
         guttlerPageControl.bindScrollView = scrollView
         view.addSubview(guttlerPageControl)
 
-        /* PAGE CONTROL */
-
-        /* CUSTOM NAVBAR */
-
+        
+        //NavigationBar customization
         let navigationTitleFont = UIFont(name: "AvenirNext-Regular", size: 18)!
         self.navigationController?.navigationBar.titleTextAttributes = [NSFontAttributeName: navigationTitleFont, NSForegroundColorAttributeName: UIColor.white]
-        
-        /* CUSTOM NAVBAR */
 
+        
         self.retrieveRooms{
-            
             self.tableview.reloadData()
         }
 
         
     }
     
- 
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        guttlerPageControl.scrollWithScrollView(scrollView)
+    }
+
     
     func retrieveRooms(_ completed: @escaping DownloadComplete){
         
@@ -98,6 +99,7 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
                         
                     }else if (room.type == "PRIVATE") {
                         
+                        print(room.thumbnail)
                         self.privRooms.append(room)
                     }
                 }
@@ -132,47 +134,50 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         
     }
  
-   
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-       
-        return headers[section]
+ 
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return headers.count
+        
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        
         return headers.count
     }
     
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return headers[section]
+    }
+   
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         return 1
     }
 
-    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
 
-        cell.backgroundColor = .clear
+        print("indexpath: \(indexPath.row)")
+        cell.backgroundColor = UIColor(hexString: Constants.themeColor2)
         return cell
     }
 
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
 
         guard let tableViewCell = cell as? TableViewCell else { return }
-        cell.backgroundColor = .clear
+        cell.backgroundColor = UIColor(hexString: Constants.themeColor2)
 
 
-        tableViewCell.setCollectionViewDataSourceDelegate(self, forRow: indexPath.row)
-        tableViewCell.collectionViewOffset = storedOffsets[indexPath.row] ?? 0
+        print("INDEXPATH: \(indexPath.section)")
+        tableViewCell.setCollectionViewDataSourceDelegate(self, forRow: indexPath.section)
+        //tableViewCell.collectionViewOffset = storedOffsets[indexPath.row] ?? 0
     }
 
     func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
 
         guard let tableViewCell = cell as? TableViewCell else { return }
 
-        tableViewCell.backgroundColor = .clear
-        storedOffsets[indexPath.row] = tableViewCell.collectionViewOffset
+        tableViewCell.backgroundColor = UIColor(hexString: Constants.themeColor2)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -183,6 +188,7 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
 extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
+        print("TAG \(collectionView.tag)")
         if(collectionView.tag == 0){
             
             return self.pubRooms.count
@@ -195,13 +201,13 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath)
-
+        
         cell.backgroundColor = .clear
         
         let cellImage = UIImageView(frame: CGRect(x: 0, y: 0, width: 98, height: 68))
         
         
-        if(indexPath.section == 0){
+        if(collectionView.tag == 0){
             
             if(self.pubRooms.count > 0){
                 
@@ -212,35 +218,48 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource {
 
             }
             
-        }else if(indexPath.section == 1){
+        }else if(collectionView.tag == 1){
             
-             if(self.privRooms.count > 0){
+                if(self.privRooms.count > 0){
                 
                 if(self.privRooms.count > indexPath.row){
 
                     cellImage.image = UIImage.contentOfURL(link: self.privRooms[indexPath.row].thumbnail)
                     cell.addSubview(cellImage)
                 }
-
             }
         }
     
-    
+        
+
         return cell
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        print("Collection view at row \(collectionView.tag) selected index path \(indexPath.row)")
+        //print("Collection view at row \(collectionView.tag) selected index path \(indexPath.row)")
         
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "Video") as! VideoViewController
-
-        vc.room_id = "\(self.pubRooms[indexPath.row].id)"
-        //self.show(vc, sender: nil)
+        
+        switch collectionView.tag {
+        case 0:
+            vc.room_id = "\(self.pubRooms[indexPath.row].id)"
+            break
+        case 1:
+            vc.room_id = "\(self.privRooms[indexPath.row].id)"
+            break
+        default: break
+            // niks
+        }
+        self.show(vc, sender: nil)
     }
     
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        guttlerPageControl.scrollWithScrollView(scrollView)
-    }
+    
+    func showProfile(){
+        
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "Profile") as! ProfileViewController
 
+        self.show(vc, sender: nil)
+
+    }
 }

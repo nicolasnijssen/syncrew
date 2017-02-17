@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16A320" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="ProfileCell" selectionStyle="none" indentationWidth="10" reuseIdentifier="ProfileCell" rowHeight="81" id="o2B-V6-rTT" customClass="ProfileCell" customModule="Syncrew" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="81"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="o2B-V6-rTT" id="bXD-hi-3Bn">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="80"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dsz-7t-uvr">
+                        <rect key="frame" x="8" y="6" width="304" height="68"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="tintColor" red="0.40000000600000002" green="0.80000001190000003" blue="1" alpha="0.0" colorSpace="calibratedRGB"/>
+                    </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My rooms" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0LL-Ju-R3R">
+                        <rect key="frame" x="21" y="30" width="81" height="21"/>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                        <color key="textColor" red="0.21960784310000001" green="0.23137254900000001" blue="0.28627450980000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <color key="backgroundColor" red="0.95686274510000002" green="0.96862745100000003" blue="0.98039215690000003" alpha="1" colorSpace="calibratedRGB"/>
+                <constraints>
+                    <constraint firstItem="dsz-7t-uvr" firstAttribute="leading" secondItem="bXD-hi-3Bn" secondAttribute="leadingMargin" id="42s-gf-uuv"/>
+                    <constraint firstItem="0LL-Ju-R3R" firstAttribute="top" secondItem="bXD-hi-3Bn" secondAttribute="topMargin" constant="22" id="asA-Uz-W3V"/>
+                    <constraint firstItem="0LL-Ju-R3R" firstAttribute="leading" secondItem="bXD-hi-3Bn" secondAttribute="leading" constant="21" id="eeJ-pT-wfh"/>
+                    <constraint firstItem="dsz-7t-uvr" firstAttribute="trailing" secondItem="bXD-hi-3Bn" secondAttribute="trailingMargin" id="gEL-AU-DIZ"/>
+                    <constraint firstItem="dsz-7t-uvr" firstAttribute="top" secondItem="bXD-hi-3Bn" secondAttribute="topMargin" constant="-2" id="iSu-pe-eWd"/>
+                    <constraint firstItem="dsz-7t-uvr" firstAttribute="centerY" secondItem="bXD-hi-3Bn" secondAttribute="centerY" id="zau-PE-Hmq"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="title" destination="0LL-Ju-R3R" id="DqP-mb-wuX"/>
+            </connections>
+            <point key="canvasLocation" x="53" y="5"/>
+        </tableViewCell>
+    </objects>
+</document>

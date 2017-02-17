@@ -16,6 +16,10 @@ class StreamViewController: UIViewController,UITableViewDelegate,UITableViewData
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+        //self.tableView.backgroundColor = .clear
+       // self.tableView.separatorStyle = UITableViewCellSeparatorStyle.none
+        
     }
     
     
@@ -35,6 +39,13 @@ class StreamViewController: UIViewController,UITableViewDelegate,UITableViewData
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         let cell = cell as! VideoCell
+        
+        cell.labelArtist.numberOfLines = 0
+        cell.labelArtist.adjustsFontSizeToFitWidth = true
+
+        cell.labelTitle.numberOfLines = 0
+        cell.labelTitle.adjustsFontSizeToFitWidth = true
+
         cell.labelArtist.text = "Unbox Therapy"
         cell.labelTitle.text = self.videos[indexPath.row].title
         

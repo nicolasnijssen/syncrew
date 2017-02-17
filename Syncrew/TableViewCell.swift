@@ -16,7 +16,6 @@ extension TableViewCell {
         collectionView.setContentOffset(collectionView.contentOffset, animated:false) // Stops collection view if it was scrolling.
         collectionView.reloadData()
         
-        print("TAG IS: \(collectionView.tag)")
     }
 
     var collectionViewOffset: CGFloat {

@@ -86,6 +86,10 @@ public struct YTFPlayer {
             dragViewController = nil
         }
     }
+    
+     var prefersStatusBarHidden: Bool {
+        return true
+    }
 }
 
 var dragViewController: YTFViewController?

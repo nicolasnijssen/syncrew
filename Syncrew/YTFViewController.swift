@@ -135,6 +135,8 @@ class YTFViewController: UIViewController {
         tableView.dataSource = dataSource
         tableView.rowHeight = CGFloat(76)
         tableView.register(UINib(nibName: tableCellNibName!, bundle: nil), forCellReuseIdentifier: tableCellNibName!)
+        tableView.backgroundColor = UIColor(hexString: Constants.themeColor2)
+        tableView.separatorStyle = .none
         
         //tableView.isHidden = true
     }

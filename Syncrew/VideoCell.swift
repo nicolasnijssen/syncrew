@@ -12,4 +12,6 @@ class VideoCell: UITableViewCell {
     @IBOutlet weak var imageThumbnail: UIImageView!
     @IBOutlet weak var labelArtist: UILabel!
     @IBOutlet weak var labelTitle: UILabel!
+    
+    
 }

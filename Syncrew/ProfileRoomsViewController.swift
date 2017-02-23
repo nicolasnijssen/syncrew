@@ -25,6 +25,7 @@ class ProfileRoomViewController: UITableViewController {
         self.tableView.backgroundColor = UIColor(hexString: Constants.themeColor2)
         self.tableView.separatorStyle = UITableViewCellSeparatorStyle.none
 
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
 
     }
     
@@ -33,11 +34,8 @@ class ProfileRoomViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         if(section == 0){
-            
             return currentRooms.count
-            
         }else {
-            
             return 1
         }
     }
@@ -92,6 +90,16 @@ class ProfileRoomViewController: UITableViewController {
         }
         
         return 1.0
+    }
+    
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        if indexPath.section == 1 {
+            
+            let vc = self.storyboard?.instantiateViewController(withIdentifier: "CreateRoom") as! RoomCreatorViewController
+            self.show(vc, sender: nil)
+        }
     }
     
     

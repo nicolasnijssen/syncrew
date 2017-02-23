@@ -31,6 +31,9 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     
         self.tableview.backgroundColor = UIColor(hexString: Constants.themeColor2)
         self.tableview.separatorStyle = UITableViewCellSeparatorStyle.none
+        
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+
 
     }
     

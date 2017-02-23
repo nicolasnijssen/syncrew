@@ -12,4 +12,5 @@ struct Constants {
     
     static let themeColor1 = "E8F0FF"
     static let themeColor2 = "F4F7FA"
+    static var token = ""
 }

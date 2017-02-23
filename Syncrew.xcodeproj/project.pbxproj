@@ -43,7 +43,7 @@
 		6D1F03731E4367810090D085 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6D1F03721E4367810090D085 /* GoogleService-Info.plist */; };
 		6D1F03761E43685A0090D085 /* Room.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D1F03751E43685A0090D085 /* Room.swift */; };
 		6D1F037B1E4375A50090D085 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D1F037A1E4375A50090D085 /* Extension.swift */; };
-		6D1F037F1E437DDD0090D085 /* APICommunicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D1F037E1E437DDD0090D085 /* APICommunicator.swift */; };
+		6D25F6D61E5CA49F00A02408 /* chat2.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D25F6D51E5CA49F00A02408 /* chat2.png */; };
 		6D376F401E546F98009D4CA5 /* GuttlerPageControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D376F3C1E546F98009D4CA5 /* GuttlerPageControl.swift */; };
 		6D376F411E546F98009D4CA5 /* IndicatorLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D376F3D1E546F98009D4CA5 /* IndicatorLayer.swift */; };
 		6D376F421E546F98009D4CA5 /* BubblesLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D376F3E1E546F98009D4CA5 /* BubblesLayer.swift */; };
@@ -133,7 +133,7 @@
 		6D1F03721E4367810090D085 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		6D1F03751E43685A0090D085 /* Room.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Room.swift; sourceTree = "<group>"; };
 		6D1F037A1E4375A50090D085 /* Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
-		6D1F037E1E437DDD0090D085 /* APICommunicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APICommunicator.swift; sourceTree = "<group>"; };
+		6D25F6D51E5CA49F00A02408 /* chat2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chat2.png; sourceTree = "<group>"; };
 		6D376F3C1E546F98009D4CA5 /* GuttlerPageControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GuttlerPageControl.swift; sourceTree = "<group>"; };
 		6D376F3D1E546F98009D4CA5 /* IndicatorLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IndicatorLayer.swift; sourceTree = "<group>"; };
 		6D376F3E1E546F98009D4CA5 /* BubblesLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BubblesLayer.swift; sourceTree = "<group>"; };
@@ -267,6 +267,7 @@
 				6D1F03741E43684B0090D085 /* Models */,
 				6D1F03791E4375990090D085 /* Extensions */,
 				6D1F034B1E4367760090D085 /* Assets.xcassets */,
+				6D25F6D51E5CA49F00A02408 /* chat2.png */,
 				6D1F03481E4367760090D085 /* Main.storyboard */,
 				6D1F034D1E4367760090D085 /* LaunchScreen.storyboard */,
 				6D1F03501E4367760090D085 /* Info.plist */,
@@ -300,16 +301,6 @@
 				6D376F3D1E546F98009D4CA5 /* IndicatorLayer.swift */,
 				6D376F3E1E546F98009D4CA5 /* BubblesLayer.swift */,
 				6D376F3F1E546F98009D4CA5 /* RandomColor.swift */,
-				6D3DCC5A1E53A50000A0D5C7 /* User.swift */,
-				6D3DCC5B1E53A50000A0D5C7 /* Message.swift */,
-				6D3DCC5C1E53A50000A0D5C7 /* Conversation.swift */,
-				6D12BB941E4B122C00C5BF04 /* YTPlayerView.h */,
-				6D12BB951E4B122C00C5BF04 /* YTPlayerView.m */,
-				6D12BBC41E4B183D00C5BF04 /* Video.swift */,
-				6D1F03751E43685A0090D085 /* Room.swift */,
-				6D1F037E1E437DDD0090D085 /* APICommunicator.swift */,
-				6D12BBC61E4B184F00C5BF04 /* VideoCell.swift */,
-				6D12BBC71E4B184F00C5BF04 /* VideoCell.xib */,
 				6D12BB931E4B122B00C5BF04 /* Syncrew-Bridging-Header.h */,
 			);
 			name = Models;
@@ -328,7 +319,6 @@
 		6D376F461E55F734009D4CA5 /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				6D12BBCB1E4DFA1B00C5BF04 /* RoomCreatorViewController.swift */,
 				6D3DCC651E54512D00A0D5C7 /* TableViewCell.swift */,
 				6D3DCC641E54512D00A0D5C7 /* ViewController.swift */,
 			);
@@ -338,8 +328,14 @@
 		6D376F471E55F739009D4CA5 /* Video */ = {
 			isa = PBXGroup;
 			children = (
+				6D12BB941E4B122C00C5BF04 /* YTPlayerView.h */,
+				6D12BB951E4B122C00C5BF04 /* YTPlayerView.m */,
+				6D12BBC41E4B183D00C5BF04 /* Video.swift */,
+				6D1F03751E43685A0090D085 /* Room.swift */,
 				6D1F03461E4367760090D085 /* VideoViewController.swift */,
 				6D376F441E549B70009D4CA5 /* StreamViewController.swift */,
+				6D12BBC61E4B184F00C5BF04 /* VideoCell.swift */,
+				6D12BBC71E4B184F00C5BF04 /* VideoCell.xib */,
 			);
 			name = Video;
 			sourceTree = "<group>";
@@ -351,6 +347,7 @@
 				6D376F4B1E57301B009D4CA5 /* ProfileCell.swift */,
 				6D376F4D1E573041009D4CA5 /* ProfileCell.xib */,
 				6D376F511E573E94009D4CA5 /* ProfileRoomsViewController.swift */,
+				6D12BBCB1E4DFA1B00C5BF04 /* RoomCreatorViewController.swift */,
 			);
 			name = Profile;
 			sourceTree = "<group>";
@@ -358,6 +355,9 @@
 		6D3DCC4D1E53A4E200A0D5C7 /* Login + Chat */ = {
 			isa = PBXGroup;
 			children = (
+				6D3DCC5A1E53A50000A0D5C7 /* User.swift */,
+				6D3DCC5B1E53A50000A0D5C7 /* Message.swift */,
+				6D3DCC5C1E53A50000A0D5C7 /* Conversation.swift */,
 				6D3DCC4E1E53A4F100A0D5C7 /* LaunchViewController.swift */,
 				6D3DCC4F1E53A4F100A0D5C7 /* LoginViewController.swift */,
 				6D3DCC501E53A4F100A0D5C7 /* NavVC.swift */,
@@ -521,6 +521,7 @@
 				6D12BBC01E4B182900C5BF04 /* play@2x.png in Resources */,
 				6D12BBBC1E4B182900C5BF04 /* NowPlayingCollapseChevronMask@3x.png in Resources */,
 				6D12BBBF1E4B182900C5BF04 /* play.png in Resources */,
+				6D25F6D61E5CA49F00A02408 /* chat2.png in Resources */,
 				6D12BBC11E4B182900C5BF04 /* unfullscreen.png in Resources */,
 				6D12BBBE1E4B182900C5BF04 /* pause@2x.png in Resources */,
 				6D1F034C1E4367760090D085 /* Assets.xcassets in Resources */,
@@ -700,7 +701,6 @@
 				6D1F037B1E4375A50090D085 /* Extension.swift in Sources */,
 				6D3DCC671E54512D00A0D5C7 /* TableViewCell.swift in Sources */,
 				6D3DCC591E53A4F100A0D5C7 /* VCCells.swift in Sources */,
-				6D1F037F1E437DDD0090D085 /* APICommunicator.swift in Sources */,
 				6D3DCC551E53A4F100A0D5C7 /* LoginViewController.swift in Sources */,
 				6D3DCC5F1E53A50000A0D5C7 /* Conversation.swift in Sources */,
 				6D3DCC5D1E53A50000A0D5C7 /* User.swift in Sources */,

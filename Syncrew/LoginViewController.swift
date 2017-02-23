@@ -1,10 +1,7 @@
-//  Syncrew
-//
-//  Created by Nicolas Nijssen
-//  Copyright © 2017 nicolas. All rights reserved.
-//
 import UIKit
 import Photos
+import Alamofire
+import JAYSON
 
 class LoginViewController: UIViewController, UITextFieldDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
 
@@ -83,7 +80,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate, UINavigationCo
     }
     
  
- 
     func showLoading(state: Bool)  {
         if state {
             self.darkView.isHidden = false
@@ -106,25 +102,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate, UINavigationCo
         self.show(vc, sender: nil)
     }
     
-    func openPhotoPickerWith(source: PhotoSource) {
-        switch source {
-        case .camera:
-            let status = AVCaptureDevice.authorizationStatus(forMediaType: AVMediaTypeVideo)
-            if (status == .authorized || status == .notDetermined) {
-                self.imagePicker.sourceType = .camera
-                self.imagePicker.allowsEditing = true
-                self.present(self.imagePicker, animated: true, completion: nil)
-            }
-        case .library:
-            let status = PHPhotoLibrary.authorizationStatus()
-            if (status == .authorized || status == .notDetermined) {
-                self.imagePicker.sourceType = .savedPhotosAlbum
-                self.imagePicker.allowsEditing = true
-                self.present(self.imagePicker, animated: true, completion: nil)
-            }
-        }
-    }
-    
+
     @IBAction func switchViews(_ sender: UIButton) {
         if self.isLoginViewVisible {
             self.isLoginViewVisible = false
@@ -173,42 +151,11 @@ class LoginViewController: UIViewController, UITextFieldDelegate, UINavigationCo
             item.resignFirstResponder()
         }
         self.showLoading(state: true)
-        User.loginUser(withEmail: self.loginEmailField.text!, password: self.loginPasswordField.text!) { [weak weakSelf = self](status) in
-            DispatchQueue.main.async {
-                weakSelf?.showLoading(state: false)
-                for item in self.inputFields {
-                    item.text = ""
-                }
-                if status == true {
-                    weakSelf?.pushToMainView()
-                } else {
-                    for item in (weakSelf?.waringLabels)! {
-                        item.isHidden = false
-                    }
-                }
-                weakSelf = nil
-            }
-        }
+        self.postLogin(username: self.loginEmailField.text!, password: self.loginPasswordField.text!)
+        
     }
     
-    @IBAction func selectPic(_ sender: Any) {
-        let sheet = UIAlertController(title: nil, message: "Select the source", preferredStyle: .actionSheet)
-        let cameraAction = UIAlertAction(title: "Camera", style: .default, handler: {
-            (alert: UIAlertAction!) -> Void in
-            self.openPhotoPickerWith(source: .camera)
-        })
-        let photoAction = UIAlertAction(title: "Gallery", style: .default, handler: {
-            (alert: UIAlertAction!) -> Void in
-            self.openPhotoPickerWith(source: .library)
-        })
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        sheet.addAction(cameraAction)
-        sheet.addAction(photoAction)
-        sheet.addAction(cancelAction)
-        self.present(sheet, animated: true, completion: nil)
-    }
-    
-    //MARK: Delegates
+       //MARK: Delegates
     func textFieldDidBeginEditing(_ textField: UITextField) {
         for item in self.waringLabels {
             item.isHidden = true
@@ -219,13 +166,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate, UINavigationCo
         textField.resignFirstResponder()
         return true
     }
-    
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        if let pickedImage = info[UIImagePickerControllerEditedImage] as? UIImage {
-            self.profilePicView.image = pickedImage
-        }
-        picker.dismiss(animated: true, completion: nil)
-    }
+  
     
     //MARK: Viewcontroller lifecycle
     override func viewDidLoad() {
@@ -244,4 +185,20 @@ class LoginViewController: UIViewController, UITextFieldDelegate, UINavigationCo
         self.cloudsView.layer.removeAllAnimations()
         self.view.layoutIfNeeded()
     }
+    
+    func postLogin(username:String, password:String){
+        
+        let parameters: Parameters = ["username": "Jef", "password":"password"]
+     
+        let url = "https://syncrew-auth0.herokuapp.com/login"
+        
+        Alamofire.request(url, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: [:])
+            .responseJSON { response in
+                
+                
+                Constants.token = response.response?.allHeaderFields["Authorization"]! as! String
+                
+            }
+        
+          }
 }

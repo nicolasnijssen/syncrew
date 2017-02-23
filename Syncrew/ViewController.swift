@@ -8,6 +8,7 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     
     @IBOutlet weak var tableview:UITableView!
     @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var loadingView: UIView!
 
     var headers = ["Public","Private"]
 
@@ -16,6 +17,7 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
 
     var pubRooms:Array<Room> = Array<Room>()
     var privRooms:Array<Room> = Array<Room>()
+    
 
     
     override func viewDidLoad() {
@@ -25,22 +27,25 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
 
         self.title = "Syncrew"
         
+    
+        //Right bar button item
         let rightBtn = UIButton(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
         rightBtn.setImage(UIImage(named: "profile pic"), for: UIControlState.normal)
         
         rightBtn.addTarget(self, action: #selector(self.showProfile), for:  UIControlEvents.touchUpInside)
         
         let item = UIBarButtonItem(customView: rightBtn)
-        
         self.navigationItem.rightBarButtonItem = item
-
+        
         
         self.view.backgroundColor = UIColor(hexString: "#FEFEFE")
         
+        //Background TableView settings
         self.tableview.backgroundColor = UIColor(hexString: Constants.themeColor2)
         self.tableview.separatorStyle = UITableViewCellSeparatorStyle.none
 
         
+        //Page control
         let pageSize = self.scrollView.frame.width
         
         scrollView.contentSize = CGSize(width: pageSize * CGFloat(numOfpage), height: scrollView.frame.height)
@@ -66,9 +71,12 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         //NavigationBar customization
         let navigationTitleFont = UIFont(name: "AvenirNext-Regular", size: 18)!
         self.navigationController?.navigationBar.titleTextAttributes = [NSFontAttributeName: navigationTitleFont, NSForegroundColorAttributeName: UIColor.white]
-
         
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        
+        //get rooms from API
         self.retrieveRooms{
+            self.hideLoading()
             self.tableview.reloadData()
         }
 
@@ -99,7 +107,6 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
                         
                     }else if (room.type == "PRIVATE") {
                         
-                        print(room.thumbnail)
                         self.privRooms.append(room)
                     }
                 }
@@ -157,7 +164,6 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
 
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
 
-        print("indexpath: \(indexPath.row)")
         cell.backgroundColor = UIColor(hexString: Constants.themeColor2)
         return cell
     }
@@ -168,7 +174,6 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         cell.backgroundColor = UIColor(hexString: Constants.themeColor2)
 
 
-        print("INDEXPATH: \(indexPath.section)")
         tableViewCell.setCollectionViewDataSourceDelegate(self, forRow: indexPath.section)
         //tableViewCell.collectionViewOffset = storedOffsets[indexPath.row] ?? 0
     }
@@ -188,7 +193,6 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
 extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        print("TAG \(collectionView.tag)")
         if(collectionView.tag == 0){
             
             return self.pubRooms.count
@@ -237,7 +241,6 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource {
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        //print("Collection view at row \(collectionView.tag) selected index path \(indexPath.row)")
         
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "Video") as! VideoViewController
         
@@ -249,7 +252,6 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource {
             vc.room_id = "\(self.privRooms[indexPath.row].id)"
             break
         default: break
-            // niks
         }
         self.show(vc, sender: nil)
     }
@@ -261,5 +263,11 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource {
 
         self.show(vc, sender: nil)
 
+    }
+    
+    func hideLoading(){
+        
+        self.loadingView.isHidden = true
+        
     }
 }

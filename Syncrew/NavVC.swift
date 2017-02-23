@@ -1,9 +1,3 @@
-//  Syncrew
-//
-//  Created by Nicolas Nijssen
-//  Copyright © 2017 nicolas. All rights reserved.
-//
-
 import UIKit
 import Firebase
 import MapKit

@@ -429,7 +429,9 @@ extension YTFViewController {
         self.tableViewContainer.removeFromSuperview()
         self.transparentView?.removeFromSuperview()
         self.playerControlsView.removeFromSuperview()
-        self.backPlayerControlsView.removeFromSuperview()
+        //self.backPlayerControlsView.removeFromSuperview()
+        
+        YTFPlayer.finishYTFView(true)
     }
     
 }

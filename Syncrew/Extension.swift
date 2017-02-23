@@ -88,6 +88,7 @@ extension UIColor {
 
 
 typealias DownloadComplete = () -> ()
+typealias LoadComplete = () -> ()
 
 
 enum RoomType{
@@ -95,4 +96,6 @@ enum RoomType{
     case Public
     case Private
 }
+
+
 

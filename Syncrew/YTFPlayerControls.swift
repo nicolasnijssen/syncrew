@@ -42,8 +42,6 @@ extension YTFViewController {
     }
     
     func playIndex(_ index: Int) {
-        print("Index \(index)")
-        print("URLS COUNT \(urls!.count)")
         playerView.url = urls![index]
         playerView.play()
         progressIndicatorView.isHidden = false

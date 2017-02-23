@@ -680,10 +680,10 @@ NSString static *const kYTPlayerSyndicationRegexPattern = @"^https://tpc.googles
     [playerParams addEntriesFromDictionary:additionalPlayerParams];
   }
   if (![playerParams objectForKey:@"height"]) {
-    [playerParams setValue:@"100%" forKey:@"height"];
+      [playerParams setValue:[NSString stringWithFormat: @"%0.00f", self.frame.size.height] forKey:@"height"];
   }
   if (![playerParams objectForKey:@"width"]) {
-    [playerParams setValue:@"100%" forKey:@"width"];
+    [playerParams setValue:[NSString stringWithFormat: @"%0.00f", self.frame.size.width] forKey:@"width"];
   }
 
   [playerParams setValue:playerCallbacks forKey:@"events"];

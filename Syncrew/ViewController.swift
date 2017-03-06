@@ -74,15 +74,24 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         
+        
+        GlobalCommunicator.getInstance().getAccountInfo()
+
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        
+        self.pubRooms.removeAll()
+        self.privRooms.removeAll()
+        
         //get rooms from API
         self.retrieveRooms{
             self.hideLoading()
             self.tableview.reloadData()
         }
 
-        
     }
-    
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         guttlerPageControl.scrollWithScrollView(scrollView)
     }
@@ -101,12 +110,17 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
                     let room:Room = Room(id: jayson[i]["id"].int!,name: jayson[i]["name"].string!, thumbnail: jayson[i]["thumbnail"].string!, type: jayson[i]["room_type"].string!)
                     
                     
+                    
                     if(room.type == "PUBLIC"){
                         
+                        print("public: \(room.name)")
+
                         self.pubRooms.append(room)
                         
                     }else if (room.type == "PRIVATE") {
                         
+                        print("private: \(room.name)")
+
                         self.privRooms.append(room)
                     }
                 }
@@ -198,6 +212,7 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource {
             return self.pubRooms.count
         }else {
             
+            print("priv \(self.privRooms.count)")
             return self.privRooms.count
         }
     }

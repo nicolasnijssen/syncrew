@@ -7,11 +7,14 @@
 //
 
 import UIKit
+import Alamofire
+import JAYSON
+
 
 class ProfileRoomViewController: UITableViewController {
     
     
-    var currentRooms = ["Fail army room", "4th room"]
+    var currentRooms:Array<Room> = Array<Room>()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,6 +31,39 @@ class ProfileRoomViewController: UITableViewController {
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
 
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.currentRooms.removeAll()
+
+        retrieveRooms{
+            self.tableView.reloadData()
+        }
+    }
+    
+    func retrieveRooms(_ completed: @escaping DownloadComplete){
+        
+        Alamofire.request("http://127.0.0.1:8000/api/rooms/\(GlobalCommunicator.getInstance().account!.id)").responseJSON { response in
+            
+            if let json = response.result.value {
+                
+                let jayson = try! JAYSON(any:json)
+                
+                for var i in (0..<jayson.array!.count){
+                    
+                    let room:Room = Room(id: jayson[i]["id"].int!,name: jayson[i]["name"].string!, thumbnail: jayson[i]["thumbnail"].string!, type: jayson[i]["room_type"].string!)
+                    
+                    self.currentRooms.append(room)
+                
+                }
+                
+            }
+            
+            completed()
+            
+        }
+    }
+    
+
     
     
     /* Table View Functions */
@@ -59,7 +95,8 @@ class ProfileRoomViewController: UITableViewController {
         
         if indexPath.section == 0 {
             
-            cell.title.text = self.currentRooms[indexPath.row]
+            cell.title.textAlignment = .left
+            cell.title.text = self.currentRooms[indexPath.row].name
 
         } else if (indexPath.section == 1) {
             

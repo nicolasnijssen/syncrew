@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		04982A30AF68155AD159DAD4 /* Pods_Syncrew.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F213B58AADCB1C59C9DA2917 /* Pods_Syncrew.framework */; };
 		60EE316619E25FDD36324C5D /* Pods_SyncrewUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FE7E22ED697ACBB6A1782BA /* Pods_SyncrewUITests.framework */; };
-		6D0C22A91E6D6C86005D1958 /* GlobalCommunicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D0C22A81E6D6C86005D1958 /* GlobalCommunicator.swift */; };
+		6D0C22A91E6D6C86005D1958 /* AccountManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D0C22A81E6D6C86005D1958 /* AccountManager.swift */; };
 		6D0C22AB1E6D6CD0005D1958 /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D0C22AA1E6D6CD0005D1958 /* Account.swift */; };
 		6D12BB961E4B122C00C5BF04 /* YTPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D12BB951E4B122C00C5BF04 /* YTPlayerView.m */; };
 		6D12BBA51E4B181F00C5BF04 /* CustomProgressSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D12BB9E1E4B181F00C5BF04 /* CustomProgressSlider.swift */; };
@@ -55,15 +55,12 @@
 		6D376F4E1E573041009D4CA5 /* ProfileCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D376F4D1E573041009D4CA5 /* ProfileCell.xib */; };
 		6D376F501E573A26009D4CA5 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D376F4F1E573A26009D4CA5 /* Constants.swift */; };
 		6D376F521E573E94009D4CA5 /* ProfileRoomsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D376F511E573E94009D4CA5 /* ProfileRoomsViewController.swift */; };
+		6D3B88831E7066DD00ACD07F /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3B88821E7066DD00ACD07F /* ChatViewController.swift */; };
+		6D3B88851E707A0D00ACD07F /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3B88841E707A0D00ACD07F /* Message.swift */; };
+		6D3B88911E72D91E00ACD07F /* NNStompClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3B88901E72D91E00ACD07F /* NNStompClient.swift */; };
 		6D3DCC541E53A4F100A0D5C7 /* LaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3DCC4E1E53A4F100A0D5C7 /* LaunchViewController.swift */; };
 		6D3DCC551E53A4F100A0D5C7 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3DCC4F1E53A4F100A0D5C7 /* LoginViewController.swift */; };
-		6D3DCC561E53A4F100A0D5C7 /* NavVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3DCC501E53A4F100A0D5C7 /* NavVC.swift */; };
-		6D3DCC571E53A4F100A0D5C7 /* ConversationsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3DCC511E53A4F100A0D5C7 /* ConversationsVC.swift */; };
-		6D3DCC581E53A4F100A0D5C7 /* ChatVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3DCC521E53A4F100A0D5C7 /* ChatVC.swift */; };
 		6D3DCC591E53A4F100A0D5C7 /* VCCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3DCC531E53A4F100A0D5C7 /* VCCells.swift */; };
-		6D3DCC5D1E53A50000A0D5C7 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3DCC5A1E53A50000A0D5C7 /* User.swift */; };
-		6D3DCC5E1E53A50000A0D5C7 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3DCC5B1E53A50000A0D5C7 /* Message.swift */; };
-		6D3DCC5F1E53A50000A0D5C7 /* Conversation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3DCC5C1E53A50000A0D5C7 /* Conversation.swift */; };
 		6D3DCC611E53A50700A0D5C7 /* Helper Files.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3DCC601E53A50700A0D5C7 /* Helper Files.swift */; };
 		6D3DCC661E54512D00A0D5C7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3DCC641E54512D00A0D5C7 /* ViewController.swift */; };
 		6D3DCC671E54512D00A0D5C7 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3DCC651E54512D00A0D5C7 /* TableViewCell.swift */; };
@@ -92,7 +89,7 @@
 		46D27E2BC1B291A251D7D509 /* Pods-Syncrew.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Syncrew.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Syncrew/Pods-Syncrew.debug.xcconfig"; sourceTree = "<group>"; };
 		50534FBB9A2458A3CD52BC1B /* Pods-SyncrewUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SyncrewUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SyncrewUITests/Pods-SyncrewUITests.release.xcconfig"; sourceTree = "<group>"; };
 		6320DAEB69A2F34B03A7F4DB /* Pods-SyncrewUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SyncrewUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SyncrewUITests/Pods-SyncrewUITests.debug.xcconfig"; sourceTree = "<group>"; };
-		6D0C22A81E6D6C86005D1958 /* GlobalCommunicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalCommunicator.swift; sourceTree = "<group>"; };
+		6D0C22A81E6D6C86005D1958 /* AccountManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountManager.swift; sourceTree = "<group>"; };
 		6D0C22AA1E6D6CD0005D1958 /* Account.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
 		6D12BB931E4B122B00C5BF04 /* Syncrew-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Syncrew-Bridging-Header.h"; sourceTree = "<group>"; };
 		6D12BB941E4B122C00C5BF04 /* YTPlayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTPlayerView.h; sourceTree = "<group>"; };
@@ -146,15 +143,12 @@
 		6D376F4D1E573041009D4CA5 /* ProfileCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfileCell.xib; sourceTree = "<group>"; };
 		6D376F4F1E573A26009D4CA5 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		6D376F511E573E94009D4CA5 /* ProfileRoomsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileRoomsViewController.swift; sourceTree = "<group>"; };
+		6D3B88821E7066DD00ACD07F /* ChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
+		6D3B88841E707A0D00ACD07F /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		6D3B88901E72D91E00ACD07F /* NNStompClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NNStompClient.swift; sourceTree = "<group>"; };
 		6D3DCC4E1E53A4F100A0D5C7 /* LaunchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LaunchViewController.swift; sourceTree = "<group>"; };
 		6D3DCC4F1E53A4F100A0D5C7 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
-		6D3DCC501E53A4F100A0D5C7 /* NavVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavVC.swift; sourceTree = "<group>"; };
-		6D3DCC511E53A4F100A0D5C7 /* ConversationsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationsVC.swift; sourceTree = "<group>"; };
-		6D3DCC521E53A4F100A0D5C7 /* ChatVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatVC.swift; sourceTree = "<group>"; };
 		6D3DCC531E53A4F100A0D5C7 /* VCCells.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VCCells.swift; sourceTree = "<group>"; };
-		6D3DCC5A1E53A50000A0D5C7 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		6D3DCC5B1E53A50000A0D5C7 /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
-		6D3DCC5C1E53A50000A0D5C7 /* Conversation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Conversation.swift; sourceTree = "<group>"; };
 		6D3DCC601E53A50700A0D5C7 /* Helper Files.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Helper Files.swift"; sourceTree = "<group>"; };
 		6D3DCC641E54512D00A0D5C7 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		6D3DCC651E54512D00A0D5C7 /* TableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
@@ -298,13 +292,16 @@
 		6D1F03741E43684B0090D085 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				6D0C22AA1E6D6CD0005D1958 /* Account.swift */,
+				6D1F03751E43685A0090D085 /* Room.swift */,
+				6D12BBC41E4B183D00C5BF04 /* Video.swift */,
+				6D3B88901E72D91E00ACD07F /* NNStompClient.swift */,
 				6D376F3C1E546F98009D4CA5 /* GuttlerPageControl.swift */,
 				6D376F3D1E546F98009D4CA5 /* IndicatorLayer.swift */,
 				6D376F3E1E546F98009D4CA5 /* BubblesLayer.swift */,
 				6D376F3F1E546F98009D4CA5 /* RandomColor.swift */,
+				6D0C22A81E6D6C86005D1958 /* AccountManager.swift */,
 				6D12BB931E4B122B00C5BF04 /* Syncrew-Bridging-Header.h */,
-				6D0C22A81E6D6C86005D1958 /* GlobalCommunicator.swift */,
-				6D0C22AA1E6D6CD0005D1958 /* Account.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -333,8 +330,6 @@
 			children = (
 				6D12BB941E4B122C00C5BF04 /* YTPlayerView.h */,
 				6D12BB951E4B122C00C5BF04 /* YTPlayerView.m */,
-				6D12BBC41E4B183D00C5BF04 /* Video.swift */,
-				6D1F03751E43685A0090D085 /* Room.swift */,
 				6D1F03461E4367760090D085 /* VideoViewController.swift */,
 				6D376F441E549B70009D4CA5 /* StreamViewController.swift */,
 				6D12BBC61E4B184F00C5BF04 /* VideoCell.swift */,
@@ -358,15 +353,11 @@
 		6D3DCC4D1E53A4E200A0D5C7 /* Login + Chat */ = {
 			isa = PBXGroup;
 			children = (
-				6D3DCC5A1E53A50000A0D5C7 /* User.swift */,
-				6D3DCC5B1E53A50000A0D5C7 /* Message.swift */,
-				6D3DCC5C1E53A50000A0D5C7 /* Conversation.swift */,
 				6D3DCC4E1E53A4F100A0D5C7 /* LaunchViewController.swift */,
 				6D3DCC4F1E53A4F100A0D5C7 /* LoginViewController.swift */,
-				6D3DCC501E53A4F100A0D5C7 /* NavVC.swift */,
-				6D3DCC511E53A4F100A0D5C7 /* ConversationsVC.swift */,
-				6D3DCC521E53A4F100A0D5C7 /* ChatVC.swift */,
 				6D3DCC531E53A4F100A0D5C7 /* VCCells.swift */,
+				6D3B88821E7066DD00ACD07F /* ChatViewController.swift */,
+				6D3B88841E707A0D00ACD07F /* Message.swift */,
 			);
 			name = "Login + Chat";
 			sourceTree = "<group>";
@@ -697,36 +688,33 @@
 				6D376F451E549B70009D4CA5 /* StreamViewController.swift in Sources */,
 				6D376F401E546F98009D4CA5 /* GuttlerPageControl.swift in Sources */,
 				6D376F421E546F98009D4CA5 /* BubblesLayer.swift in Sources */,
+				6D3B88851E707A0D00ACD07F /* Message.swift in Sources */,
 				6D12BBA91E4B181F00C5BF04 /* YTFPlayerControls.swift in Sources */,
 				6D12BBCC1E4DFA1B00C5BF04 /* RoomCreatorViewController.swift in Sources */,
 				6D12BBA71E4B181F00C5BF04 /* YTFAnimation.swift in Sources */,
 				6D1F037B1E4375A50090D085 /* Extension.swift in Sources */,
 				6D3DCC671E54512D00A0D5C7 /* TableViewCell.swift in Sources */,
+				6D3B88911E72D91E00ACD07F /* NNStompClient.swift in Sources */,
 				6D3DCC591E53A4F100A0D5C7 /* VCCells.swift in Sources */,
 				6D3DCC551E53A4F100A0D5C7 /* LoginViewController.swift in Sources */,
-				6D3DCC5F1E53A50000A0D5C7 /* Conversation.swift in Sources */,
-				6D3DCC5D1E53A50000A0D5C7 /* User.swift in Sources */,
 				6D12BBAA1E4B181F00C5BF04 /* YTFPopupCloseButton.swift in Sources */,
-				6D3DCC581E53A4F100A0D5C7 /* ChatVC.swift in Sources */,
 				6D12BBA61E4B181F00C5BF04 /* PlayerView.swift in Sources */,
 				6D12BBC81E4B184F00C5BF04 /* VideoCell.swift in Sources */,
 				6D376F411E546F98009D4CA5 /* IndicatorLayer.swift in Sources */,
 				6D0C22AB1E6D6CD0005D1958 /* Account.swift in Sources */,
 				6D1F03471E4367760090D085 /* VideoViewController.swift in Sources */,
-				6D3DCC571E53A4F100A0D5C7 /* ConversationsVC.swift in Sources */,
 				6D12BBAB1E4B181F00C5BF04 /* YTFViewController.swift in Sources */,
 				6D12BBA81E4B181F00C5BF04 /* YTFPlayer.swift in Sources */,
+				6D3B88831E7066DD00ACD07F /* ChatViewController.swift in Sources */,
 				6D12BB961E4B122C00C5BF04 /* YTPlayerView.m in Sources */,
 				6D3DCC611E53A50700A0D5C7 /* Helper Files.swift in Sources */,
 				6D376F4A1E572F02009D4CA5 /* ProfileViewController.swift in Sources */,
 				6D1F03431E4367760090D085 /* AppDelegate.swift in Sources */,
-				6D3DCC5E1E53A50000A0D5C7 /* Message.swift in Sources */,
 				6D3DCC541E53A4F100A0D5C7 /* LaunchViewController.swift in Sources */,
-				6D0C22A91E6D6C86005D1958 /* GlobalCommunicator.swift in Sources */,
+				6D0C22A91E6D6C86005D1958 /* AccountManager.swift in Sources */,
 				6D3DCC661E54512D00A0D5C7 /* ViewController.swift in Sources */,
 				6D12BBA51E4B181F00C5BF04 /* CustomProgressSlider.swift in Sources */,
 				6D1F03761E43685A0090D085 /* Room.swift in Sources */,
-				6D3DCC561E53A4F100A0D5C7 /* NavVC.swift in Sources */,
 				6D12BBC51E4B183D00C5BF04 /* Video.swift in Sources */,
 				6D376F431E546F98009D4CA5 /* RandomColor.swift in Sources */,
 				6D376F4C1E57301B009D4CA5 /* ProfileCell.swift in Sources */,

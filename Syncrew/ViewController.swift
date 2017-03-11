@@ -75,7 +75,6 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         
         
-        GlobalCommunicator.getInstance().getAccountInfo()
 
         
     }
@@ -97,6 +96,59 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     }
 
     
+    func retrieveRooms(_ completed: @escaping DownloadComplete){
+        
+        Alamofire.request("https://syncrew-auth0.herokuapp.com/api/rooms/simple").responseJSON { response in
+            
+            if let json = response.result.value {
+                
+                let jayson = try! JAYSON(any:json)
+                
+                for var item in jayson.dictionary!.values{
+                    
+        
+                    print(item["id"].int!)
+                   
+                    let room:Room = Room(id: jayson[i]["id"].int!,name: jayson[i]["roomUrl"].string!, thumbnail: "https://dl.dropboxusercontent.com/u/211014487/Thumbs/2.png", visibile: jayson[i]["visibility"].bool!,admin:jayson[i]["adminId"].int!)
+                    
+                    
+                    for var j in (0..<jayson[i]["videoList"].array!.count){
+                      
+                        
+                        
+                        let video:Video = Video(title: jayson[i]["videoList"][j]["title"].string!, thumbnail: "", youtube: jayson[i]["videoList"][j]["url"].string!, playback: jayson[i]["videoList"][j]["playbackUrl"].string!)
+                        
+                        print("VIDEO playback is: \(video.playback)")
+                        room.addVideo(video: video)
+ 
+                        
+                    }
+                    print(room.id)
+                    
+                    
+                    if(room.visibile){
+                        
+                        print("public: \(room.name)")
+                        
+                        self.pubRooms.append(room)
+                        
+                    }else {
+                        
+                        print("private: \(room.name)")
+                        
+                        self.privRooms.append(room)
+                    }
+ 
+                }
+                
+            }
+            
+            completed()
+            
+        }
+    }
+
+/*
     func retrieveRooms(_ completed: @escaping DownloadComplete){
         
         Alamofire.request("http://127.0.0.1:8000/api/rooms").responseJSON { response in
@@ -131,6 +183,8 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
             
         }
     }
+ 
+ */
 
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -257,14 +311,14 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "Video") as! VideoViewController
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "Chat") as! ChatViewController
         
         switch collectionView.tag {
         case 0:
-            vc.room_id = "\(self.pubRooms[indexPath.row].id)"
+            vc.room = self.pubRooms[indexPath.row]
             break
         case 1:
-            vc.room_id = "\(self.privRooms[indexPath.row].id)"
+            vc.room = self.privRooms[indexPath.row]
             break
         default: break
         }

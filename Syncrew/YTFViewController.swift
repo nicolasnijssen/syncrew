@@ -167,6 +167,15 @@ class YTFViewController: UIViewController {
         
     }
     
+    func hidePlayerControls(){
+        
+       // self.playerControlsView.isHidden = true
+        self.play.isHidden = true
+        self.slider.isHidden = true
+        
+    }
+    
+    
     @IBAction func minimizeButtonTouched(_ sender: AnyObject) {
         minimizeViews()
     }
@@ -186,6 +195,8 @@ class YTFViewController: UIViewController {
     override var prefersStatusBarHidden: Bool {
         return true
     }
+    
+    
     
 }
 

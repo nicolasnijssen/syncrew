@@ -98,7 +98,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate, UINavigationCo
     }
     
     func pushToMainView() {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "Navigation") as! NavVC
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "homenav") as! UINavigationController
         self.show(vc, sender: nil)
     }
     
@@ -128,22 +128,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate, UINavigationCo
             item.resignFirstResponder()
         }
         self.showLoading(state: true)
-        User.registerUser(withName: self.registerNameField.text!, email: self.registerEmailField.text!, password: self.registerPasswordField.text!, profilePic: self.profilePicView.image!) { [weak weakSelf = self] (status) in
-            DispatchQueue.main.async {
-                weakSelf?.showLoading(state: false)
-                for item in self.inputFields {
-                    item.text = ""
-                }
-                if status == true {
-                    weakSelf?.pushToMainView()
-                    weakSelf?.profilePicView.image = UIImage.init(named: "profile pic")
-                } else {
-                    for item in (weakSelf?.waringLabels)! {
-                        item.isHidden = false
-                    }
-                }
-            }
-        }
+       
     }
     
     @IBAction func login(_ sender: Any) {
@@ -188,7 +173,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate, UINavigationCo
     
     func postLogin(username:String, password:String){
         
-        let parameters: Parameters = ["username": "Jef", "password":"password"]
+        let parameters: Parameters = ["username": "RobinPauwels", "password":"robin"]
      
         let url = "https://syncrew-auth0.herokuapp.com/login"
         
@@ -196,7 +181,14 @@ class LoginViewController: UIViewController, UITextFieldDelegate, UINavigationCo
             .responseJSON { response in
                 
                 
-                Constants.token = response.response?.allHeaderFields["Authorization"]! as! String
+                if (response.response?.statusCode == 200){
+                
+                    AccountManager.getInstance().token = response.response?.allHeaderFields["Authorization"]! as! String
+                    AccountManager.getInstance().getAccountInfo(username:"RobinPauwels")
+                    
+                    self.pushToMainView()
+                }
+                
                 
             }
         

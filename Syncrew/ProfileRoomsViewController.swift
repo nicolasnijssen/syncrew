@@ -42,7 +42,7 @@ class ProfileRoomViewController: UITableViewController {
     
     func retrieveRooms(_ completed: @escaping DownloadComplete){
         
-        Alamofire.request("http://127.0.0.1:8000/api/rooms/\(GlobalCommunicator.getInstance().account!.id)").responseJSON { response in
+        Alamofire.request("http://127.0.0.1:8000/api/rooms/\(AccountManager.getInstance().account!.id)").responseJSON { response in
             
             if let json = response.result.value {
                 
@@ -50,7 +50,7 @@ class ProfileRoomViewController: UITableViewController {
                 
                 for var i in (0..<jayson.array!.count){
                     
-                    let room:Room = Room(id: jayson[i]["id"].int!,name: jayson[i]["name"].string!, thumbnail: jayson[i]["thumbnail"].string!, type: jayson[i]["room_type"].string!)
+                    let room:Room = Room(id: jayson[i]["id"].int!,name: jayson[i]["name"].string!, thumbnail: jayson[i]["thumbnail"].string!, visibile: jayson[i]["room_type"].bool!,admin:1)
                     
                     self.currentRooms.append(room)
                 
@@ -90,6 +90,7 @@ class ProfileRoomViewController: UITableViewController {
     
     
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+       
         let cell = cell as! ProfileCell
         
         

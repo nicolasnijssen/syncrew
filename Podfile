@@ -13,6 +13,10 @@ target 'Syncrew' do
   pod 'JAYSON'
   pod 'Alamofire', '~> 4.3'
   pod 'ChameleonFramework/Swift', :git => 'https://github.com/ViccAlexander/Chameleon.git'
+  pod 'Starscream', '~> 2.0.3'
+
+
+
 
   # Pods for Syncrew
 
@@ -28,6 +32,7 @@ target 'Syncrew' do
     pod 'JAYSON'
     pod 'Alamofire', '~> 4.3'
     pod 'ChameleonFramework/Swift', :git => 'https://github.com/ViccAlexander/Chameleon.git'
+    
 
   end
 

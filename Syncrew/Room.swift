@@ -8,19 +8,30 @@
 
 import Foundation
 
-class Room: NSObject {
+class Room {
     
     var id:Int
     var name: String
     var thumbnail: String
-    var type: String
+    var visibile: Bool
+    var admin:Int
+    
+    var videos:Array<Video> = Array<Video>()
     
     
-    init(id:Int,name:String,thumbnail:String, type:String) {
+    init(id:Int,name:String,thumbnail:String, visibile:Bool,admin:Int) {
      
         self.id = id
         self.name = name
         self.thumbnail = thumbnail
-        self.type = type
+        self.visibile = visibile
+        self.admin = admin
     }
+    
+    
+    public func addVideo(video:Video){
+        
+        self.videos.append(video)
+    }
+    
 }

@@ -11,37 +11,38 @@ import UIKit
 import Alamofire
 import JAYSON
 
-class GlobalCommunicator: NSObject {
+class AccountManager: NSObject {
     
     
     var account:Account!
+    var token:String!
     
-    static var sharedInstance:GlobalCommunicator?
+    static var sharedInstance:AccountManager?
     
     
     
-    static func getInstance() -> GlobalCommunicator {
+    static func getInstance() -> AccountManager {
         
         if (sharedInstance == nil){
             
-            sharedInstance = GlobalCommunicator()
+            sharedInstance = AccountManager()
         }
         
         return sharedInstance!
     }
     
     
-    func getAccountInfo(){
+    public func getAccountInfo(username:String){
         
-        Alamofire.request("http://127.0.0.1:8000/api/users/1").responseJSON { response in
+        Alamofire.request("https://syncrew-auth0.herokuapp.com/api/users/\(username)").responseJSON { response in
             
             if let json = response.result.value {
                 
-                
                 let jayson = try! JAYSON(any:json)
                 
-                let account:Account = Account(id: jayson["id"].int!, name: jayson["name"].string!, email: jayson["email"].string!)
-                    
+                let account:Account = Account(id: jayson["userId"].int!, name: jayson["username"].string!, email: jayson["email"].string!)
+                
+                print("Account id: \(account.id)")
                 self.account = account
                     
                 

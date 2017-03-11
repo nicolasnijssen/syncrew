@@ -41,9 +41,8 @@ class RoomCreatorViewController: UIViewController, UITextFieldDelegate {
     @IBAction func postRoom(){
         
 
-        let parameters: Parameters = ["name": "5th Public", "thumbnail":"https://dl.dropboxusercontent.com/u/211014487/Thumbs/5.png","room_type":"PUBLIC","user_id":GlobalCommunicator.getInstance().account!.id]
+        let parameters: Parameters = ["name": "5th Public", "thumbnail":"https://dl.dropboxusercontent.com/u/211014487/Thumbs/5.png","room_type":"PUBLIC","user_id":AccountManager.getInstance().account!.id]
         
-        // All three of these calls are equivalent
         Alamofire.request("http://127.0.0.1:8000/api/rooms/add",method: HTTPMethod.post, parameters: parameters).responseJSON{
             response in
             

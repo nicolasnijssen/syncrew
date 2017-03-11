@@ -17,7 +17,10 @@ extension YTFViewController {
         } else {
             playerView.play()
         }
+        
+    
     }
+    
     
     @IBAction func fullScreenTouched(_ sender: AnyObject) {
         if (!isFullscreen) {

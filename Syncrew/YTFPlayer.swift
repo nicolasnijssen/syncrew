@@ -9,6 +9,7 @@
 import UIKit
 
 public struct YTFPlayer {
+    
     public static func initYTF(_ url: URL, tableCellNibName: String, delegate: UITableViewDelegate, dataSource: UITableViewDataSource) {
         if (dragViewController == nil) {
             dragViewController = YTFViewController(nibName: "YTFViewController", bundle: nil)
@@ -78,6 +79,8 @@ public struct YTFPlayer {
     public static func getYTFViewController() -> UIViewController? {
         return dragViewController
     }
+    
+
     
     public static func finishYTFView(_ animated: Bool) {
         if(dragViewController != nil) {

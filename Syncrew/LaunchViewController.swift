@@ -29,16 +29,16 @@ class LaunchViewController: UIViewController {
             let email = userInformation["email"] as! String
             let password = userInformation["password"] as! String
            
-            User.loginUser(withEmail: email, password: password, completion: { [weak weakSelf = self] (status) in
-                DispatchQueue.main.async {
-                    if status == true {
-                        weakSelf?.pushTo(viewController: .home)
-                    } else {
-                        weakSelf?.pushTo(viewController: .login)
-                    }
-                    weakSelf = nil
-                }
-            })
+//            User.loginUser(withEmail: email, password: password, completion: { [weak weakSelf = self] (status) in
+//                DispatchQueue.main.async {
+//                    if status == true {
+//                        weakSelf?.pushTo(viewController: .home)
+//                    } else {
+//                        weakSelf?.pushTo(viewController: .login)
+//                    }
+//                    weakSelf = nil
+//                }
+//            })
             
         } else {
             self.pushTo(viewController: .login)

@@ -37,9 +37,9 @@ extension UIColor {
     
     class func randomColor() -> UIColor {
         
-        let hue = CGFloat(arc4random() % 100) / 100
-        let saturation = CGFloat(arc4random() % 100) / 100
-        let brightness = CGFloat(arc4random() % 50) / 100
+        let hue = CGFloat(arc4random() % 100) / 50
+        let saturation = CGFloat(arc4random() % 100) / 50
+        let brightness = CGFloat(arc4random() % 50) / 50
         
         return UIColor(hue: hue, saturation: saturation, brightness: brightness, alpha: 1.0)
     }
@@ -89,12 +89,25 @@ extension UIColor {
 
 typealias DownloadComplete = () -> ()
 typealias LoadComplete = () -> ()
+typealias SocketComplete = () -> ()
 
 
 enum RoomType{
     
     case Public
     case Private
+}
+
+
+extension UIViewController {
+    func hideKeyboardWhenTappedAround() {
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
+        view.addGestureRecognizer(tap)
+    }
+    
+    func dismissKeyboard() {
+        view.endEditing(true)
+    }
 }
 
 

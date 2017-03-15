@@ -112,7 +112,6 @@ public class NNStompClient: NSObject, WebSocketDelegate {
     
     private func connect() {
         if (socket?.isConnected)! {
-            // at the moment only anonymous logins
             self.sendFrame(command: StompCommands.commandConnect, header: connectionHeaders, body: nil)
         } else {
             self.openSocket()
@@ -293,7 +292,6 @@ public class NNStompClient: NSObject, WebSocketDelegate {
     
     private func receiveFrame(command: String, headers: [String: String], body: String?) {
         
-        print("FRAME RECEIVED \(command) \(body)")
         if command == StompCommands.responseFrameConnected {
             // Connected
             if let sessId = headers[StompCommands.responseHeaderSession] {
@@ -306,8 +304,7 @@ public class NNStompClient: NSObject, WebSocketDelegate {
                 })
             }
         } else if command == StompCommands.responseFrameMessage {
-            // Resonse
-            
+            // Response
             if headers["content-type"]?.lowercased().range(of: "application/json") != nil {
                 if let delegate = delegate {
                     DispatchQueue.main.async(execute: {
@@ -315,7 +312,6 @@ public class NNStompClient: NSObject, WebSocketDelegate {
                     })
                 }
             } else {
-                // TODO: send binary data back
             }
         } else if command == StompCommands.responseFrameReceipt {
             // Receipt
@@ -353,12 +349,6 @@ public class NNStompClient: NSObject, WebSocketDelegate {
             headersToSend = headers
         }
         
-        // Setting up the receipt.
-      /*
-        if let receipt = receipt {
-            headersToSend[StompCommands.commandHeaderReceipt] = receipt
-        }
- */
         
         headersToSend[StompCommands.commandHeaderDestination] = destination
         
@@ -366,12 +356,7 @@ public class NNStompClient: NSObject, WebSocketDelegate {
         let contentLength = message.utf8.count
         headersToSend[StompCommands.commandHeaderContentLength] = "\(contentLength)"
         
-        // Setting up content type as plain text.
-        /*
-        if headersToSend[StompCommands.commandHeaderContentType] == nil {
-            headersToSend[StompCommands.commandHeaderContentType] = "text/plain"
-        }
- */
+ 
         
         sendFrame(command: StompCommands.commandSend, header: headersToSend, body: message as AnyObject?)
     }

@@ -4,12 +4,8 @@ class TableViewCell: UITableViewCell {
 
     @IBOutlet fileprivate weak var collectionView: UICollectionView!
 
-}
-
-extension TableViewCell {
-
     func setCollectionViewDataSourceDelegate<D: UICollectionViewDataSource & UICollectionViewDelegate>(_ dataSourceDelegate: D, forRow row: Int) {
-
+        
         collectionView.delegate = dataSourceDelegate
         collectionView.dataSource = dataSourceDelegate
         collectionView.tag = row
@@ -17,9 +13,10 @@ extension TableViewCell {
         collectionView.reloadData()
         
     }
-
+    
     var collectionViewOffset: CGFloat {
         set { collectionView.contentOffset.x = newValue }
         get { return collectionView.contentOffset.x }
     }
+
 }

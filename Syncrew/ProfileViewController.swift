@@ -12,6 +12,8 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     
     @IBOutlet weak var tableview:UITableView!
+    @IBOutlet weak var username:UILabel!
+    
     
     var titles = ["My Rooms"]
     
@@ -35,6 +37,8 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
 
 
+        self.username.text = AccountManager.getInstance().account.name
+        
     }
     
 

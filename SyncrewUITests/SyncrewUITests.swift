@@ -9,7 +9,9 @@
 import XCTest
 
 class SyncrewUITests: XCTestCase {
-        
+    let app = XCUIApplication()
+
+    
     override func setUp() {
         super.setUp()
         
@@ -31,6 +33,43 @@ class SyncrewUITests: XCTestCase {
     func testExample() {
         // Use recording to get started writing UI tests.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
+        
+        testRoom()
     }
+    
+    
+    func login(){
+        
+    
+        
+        let email = app.textFields["Email"]
+        email.tap()
+        email.typeText("RobinPauwels")
+        
+        
+        let pass = app.textFields["Password"]
+        pass.tap()
+        pass.typeText("robin")
+
+
+        app.buttons["Sign in"].tap()
+        
+        
+        
+    }
+    
+    
+    func testRoom(){
+        
+        
+        let app = XCUIApplication()
+        app.tables.staticTexts["test"].tap()
+        
+        let emptyListTable = app.tables["Empty list"]
+        emptyListTable.tap()
+        emptyListTable.swipeRight()
+        emptyListTable.tap()
+    }
+    
     
 }

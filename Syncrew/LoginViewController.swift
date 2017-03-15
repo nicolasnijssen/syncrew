@@ -9,6 +9,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate, UINavigationCo
     @IBOutlet weak var darkView: UIView!
     @IBOutlet weak var spinner: UIActivityIndicatorView!
     
+    @IBOutlet weak var logo:UILabel!
     @IBOutlet var registerView: UIView!
     @IBOutlet var loginView: UIView!
     @IBOutlet weak var profilePicView: RoundedImageView!
@@ -53,7 +54,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate, UINavigationCo
         self.view.insertSubview(self.loginView, belowSubview: self.cloudsView)
         self.loginView.translatesAutoresizingMaskIntoConstraints = false
         self.loginView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-        self.loginViewTopConstraint = NSLayoutConstraint.init(item: self.loginView, attribute: .top, relatedBy: .equal, toItem: self.view, attribute: .top, multiplier: 1, constant: 60)
+        self.loginViewTopConstraint = NSLayoutConstraint.init(item: self.loginView, attribute: .top, relatedBy: .equal, toItem: self.view, attribute: .top, multiplier: 1, constant: 150)
         self.loginViewTopConstraint.isActive = true
         self.loginView.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.45).isActive = true
         self.loginView.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.8).isActive = true
@@ -79,6 +80,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate, UINavigationCo
         })
     }
     
+    
+
  
     func showLoading(state: Bool)  {
         if state {
@@ -108,7 +111,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate, UINavigationCo
             self.isLoginViewVisible = false
             sender.setTitle("Login", for: .normal)
             self.loginViewTopConstraint.constant = 1000
-            self.registerTopConstraint.constant = 60
+            self.registerTopConstraint.constant = 150
         } else {
             self.isLoginViewVisible = true
             sender.setTitle("Create New Account", for: .normal)
@@ -171,6 +174,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate, UINavigationCo
         self.view.layoutIfNeeded()
     }
     
+    
+    //check credentials
     func postLogin(username:String, password:String){
         
         let parameters: Parameters = ["username": "RobinPauwels", "password":"robin"]

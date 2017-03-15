@@ -18,6 +18,7 @@ public struct YTFPlayer {
         dragViewController?.delegate = delegate
         dragViewController?.dataSource = dataSource
         dragViewController?.tableCellNibName = tableCellNibName
+
     }
     
     public static func initYTF(_ urls: [URL], tableCellNibName: String, delegate: UITableViewDelegate, dataSource: UITableViewDataSource) {
@@ -28,6 +29,7 @@ public struct YTFPlayer {
         dragViewController?.delegate = delegate
         dragViewController?.dataSource = dataSource
         dragViewController?.tableCellNibName = tableCellNibName
+
     }
     
     public static func showYTFView(_ viewController: UIViewController) {
@@ -46,6 +48,8 @@ public struct YTFPlayer {
                 dragViewController!.view.frame = CGRect(x: 0, y: 0, width: UIApplication.shared.keyWindow!.bounds.width, height: UIApplication.shared.keyWindow!.bounds.height)
                 
                 dragViewController!.isOpen = true
+                
+                
             })
         }
     }

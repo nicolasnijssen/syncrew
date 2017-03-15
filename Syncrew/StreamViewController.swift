@@ -12,14 +12,10 @@ class StreamViewController: UIViewController,UITableViewDelegate,UITableViewData
     
     
     var videos:Array<Video> = Array<Video>()
-
+    var isAdmin:Bool = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
-        //self.tableView.backgroundColor = .clear
-       // self.tableView.separatorStyle = UITableViewCellSeparatorStyle.none
-        
     }
     
     
@@ -40,28 +36,22 @@ class StreamViewController: UIViewController,UITableViewDelegate,UITableViewData
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         let cell = cell as! VideoCell
         
-        cell.labelArtist.numberOfLines = 0
-        cell.labelArtist.adjustsFontSizeToFitWidth = true
-
-        cell.labelTitle.numberOfLines = 0
-        cell.labelTitle.adjustsFontSizeToFitWidth = true
-
-        cell.labelArtist.text = "Unbox Therapy"
+    
+        cell.labelTitle.frame = CGRect(x: 8, y: 0, width: 100, height: 42.0)
         cell.labelTitle.text = self.videos[indexPath.row].title
         
-        if let url = NSURL(string: self.videos[indexPath.row].thumbnail) {
-            if let data = NSData(contentsOf: url as URL) {
-                cell.imageThumbnail.image = UIImage(data: data as Data)
-                
-            }
-        }
         
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        YTFPlayer.playIndex(indexPath.row)
-        videos.remove(at: indexPath.row)
-        tableView.reloadData()
+        
+        if isAdmin {
+            
+            YTFPlayer.playIndex(indexPath.row)
+            videos.remove(at: indexPath.row)
+            tableView.reloadData()
+
+        }
     }
 
     

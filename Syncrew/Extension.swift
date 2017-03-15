@@ -39,9 +39,19 @@ extension UIColor {
         
         let hue = CGFloat(arc4random() % 100) / 50
         let saturation = CGFloat(arc4random() % 100) / 50
-        let brightness = CGFloat(arc4random() % 50) / 50
+        let brightness = CGFloat(arc4random() % 50) / 20
         
         return UIColor(hue: hue, saturation: saturation, brightness: brightness, alpha: 1.0)
+    }
+    
+    class func randomBackColor() -> UIColor {
+        
+        
+        var colors = ["532bdc","F35D5C","90FF9E","F7D6A0","8BF4F0","A7FA67"]
+        
+       
+        
+        return UIColor(hexString: colors[Int(arc4random() % 6)])
     }
     
     func isLight() -> Bool

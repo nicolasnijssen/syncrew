@@ -11,14 +11,14 @@ import youtube_ios_player_helper
 import JAYSON
 import Alamofire
 
-class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSource, UITextFieldDelegate,NNStompClientDelegate {
+class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSource, UITextFieldDelegate,NNStompClientDelegate,NNVideoSocketDelegate {
     
     
     @IBOutlet weak var tableview:UITableView!
     @IBOutlet var inputBar: UIView!
     @IBOutlet weak var inputTextField: UITextField!
     @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
-
+    @IBOutlet weak var noMessages:UILabel!
     
     var messages:Array<Message> = Array<Message>()
     let stream = StreamViewController()
@@ -35,6 +35,7 @@ class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         get {
             self.inputBar.frame.size.height = self.barHeight
             self.inputBar.clipsToBounds = true
+
             return self.inputBar
         }
     }
@@ -54,7 +55,7 @@ class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         //Socket init
         socket = NNStompClient()
         socket.delegate = self
-        socket.openSocketWithURL(url: URL(string:"ws://syncrew-auth0.herokuapp.com/websocket")!, delegate: self, connectionHeaders: ["accept-version": "1.1,1.0", "heart-beat": "10000,10000"])
+        socket.openSocketWithURL(url: URL(string:"wss://syncrew-auth0.herokuapp.com/websocket")!, delegate: self, connectionHeaders: ["accept-version": "1.1,1.0", "heart-beat": "10000,10000"])
         
         
         
@@ -69,12 +70,14 @@ class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         tableview.scrollIndicatorInsets.bottom = self.barHeight
         
 
+        inputTextField.delegate = self
         inputTextField.layer.sublayerTransform = CATransform3DMakeTranslation(10, -5, 0)
         inputTextField.attributedPlaceholder = NSAttributedString(string: "Type message...",
                                                                   attributes: [NSForegroundColorAttributeName: UIColor(hexString:"767C84")])
         
-        //Set video queue
+        //Set video queue and admin rules
         self.stream.videos = room.videos
+        self.stream.isAdmin = self.isAdmin()
         
 
         //retrieve all playback urls from videos and when finished show videoplayer
@@ -87,12 +90,14 @@ class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
             //retrieve responsible ViewController for video syncing
             self.youtube = YTFPlayer.getYTFViewController() as! YTFViewController
             
+            self.youtube.videoDelegate = self
+            self.youtube.input = self.inputBar
+            
         }
         
         
         if !isAdmin() {
             
-            print("admin checked")
             self.youtube.hidePlayerControls()
         }
     }
@@ -104,7 +109,7 @@ class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         
         print("CONNECTED")
         self.socket.subscribeToDestination(destination: "/topic/syncmessages", withHeader: ["id": "sub-0"])
-        self.socket.subscribeToDestination(destination: "/topic/chatmessages", withHeader: ["id": "sub-1"])
+        self.socket.subscribeToDestination(destination: "/topic/chatmessages", withHeader: ["id": "sub-0"])
 
     }
     
@@ -125,11 +130,15 @@ class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
 
         //check message destination
         if (destination == "/topic/chatmessages"){
-            addMessageToTable(message: Message(username: jayson["id"].string!, messageText: jayson["content"].string!))
-            
+            if jayson["id"].string! == String(room.id) {
+                addMessageToTable(message: Message(username: jayson["extra"].string!, messageText: jayson["content"].string!))
+            }
         }else if (destination == "/topic/syncmessages"){
             
-            syncVideo(content: jayson["content"].string!, time:jayson["extra"].string!)
+        
+            if jayson["id"].string! == String(room.id) {
+                syncVideo(content: jayson["content"].string!, time:jayson["extra"].string!)
+            }
         }
         
     }
@@ -149,26 +158,60 @@ class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
     }
     
     
-    func isAdmin()->Bool{
+    
+    
+    //VIDEO METHODS
+    func videoDidPlay(time: Double) {
         
-        if (self.room.admin == self.user.id) {
-            
-            return true
-        }
+        print("VIDEO PLAY")
         
-        return false
+        //use logged-in username
+        let content = "{\"id\":\"\(room.id)\",\"content\":\"PLAYING\",\"extra\":\"\(time)\"}"
+        
+        socket.sendMessage(message: content, toDestination: "/app/sync", withHeaders: ["content-length":"\(content.characters.count)"], withReceipt: "")
     }
+    
+    func videoDidPause(time: Double) {
+     
+        print("VIDEO PAUSE")
+        //use logged-in username
+        let content = "{\"id\":\"\(room.id)\",\"content\":\"PAUSED\",\"extra\":\"\(time)\"}"
+        
+        socket.sendMessage(message: content, toDestination: "/app/sync", withHeaders: ["content-length":"\(content.characters.count)"], withReceipt: "")
+
+    }
+    
+    func videoDidChangePlayTime(time: Double) {
+        
+        print("VIDEO CHANGE TIME")
+
+    }
+    
+    func videoIsNormalscreen() {
+        
+        self.inputBar.isHidden = false
+
+    }
+    
+    func videoIsFullscreen() {
+        
+        self.inputBar.isHidden = true
+    }
+    
     
     //Sync video from incoming messages
     func syncVideo(content:String, time:String){
         
-        print(time)
         switch content {
         case "PAUSED":
             self.youtube.playerView.pause()
             break
+        case "BUFFERING":
+            self.youtube.playerView.pause()
+            self.youtube.playerView.currentTime = Double(time)!
+            break
         case "PLAYING":
-            self.youtube.playerView.currentTime = Double(time)! + 0.2 //add 0.2 because of latency
+            self.youtube.playerView.currentTime = Double(time)!
             self.youtube.playerView.play()
             break
         default:
@@ -183,9 +226,13 @@ class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         
         for var i in (0..<room.videos.count){
             
+        
             self.urls.append(URL(string:room.videos[i].playback)!)
             
+            
         }
+        
+        
         
         completed()
     }
@@ -196,8 +243,9 @@ class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         let message = self.inputTextField.text!
         
         //use logged-in username
-        let content = "{\"id\":\"\(self.user.name)\",\"content\":\"\(message)\"}"
+        let content = "{\"id\":\"\(self.room.id)\",\"content\":\"\(message)\",\"extra\":\"\(self.user.name)\"}"
         
+        print(content)
         socket.sendMessage(message: content, toDestination: "/app/chat", withHeaders: ["content-length":"\(message.characters.count)"], withReceipt: "")
         
         self.inputTextField.text = ""
@@ -215,6 +263,11 @@ class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
     //reload tableview content and animate new chat messages
     func animateTable(){
         
+        
+        if messages.count > 0 {
+            
+            self.noMessages.isHidden = true
+        }
         tableview.reloadData()
         
         let cells = tableview.visibleCells
@@ -282,22 +335,29 @@ class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
     }
     
     
-    
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool
-    {
-        textField.resignFirstResponder()
-        return true;
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.inputTextField.resignFirstResponder()
+        return true
     }
-    
-    
-  
-
-    
     
     override var canBecomeFirstResponder: Bool{
         return true
     }
     
+    
+    func isAdmin()->Bool{
+        
+        if (self.room.admin ==  2){//self.user.id) {
+            
+            return true
+        }
+        
+        return false
+    }
+    
+    
+    
+ 
     
 
 }

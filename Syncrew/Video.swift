@@ -10,15 +10,16 @@ import UIKit
 
 class Video {
     var title: String
-    var thumbnail: String
     var youtube: String
     var playback: String
 
     
-    init(title: String, thumbnail: String, youtube: String, playback:String) {
+    init(title: String, youtube: String, playback:String) {
         self.title = title
-        self.thumbnail = thumbnail
         self.youtube = youtube
         self.playback = playback
+        
+        print("VIDEO PLAYBACK: \(self.playback)")
+
     }
 }

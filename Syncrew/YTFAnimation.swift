@@ -254,6 +254,8 @@ extension YTFViewController {
                 self.playerView.frame = self.playerViewMinimizedFrame!
                 self.view.frame = self.viewMinimizedFrame!
                 self.tableViewContainer.alpha = 0.0
+                //self.input?.alpha = 0.0
+
                 }, completion: { finished in
                     self.isMinimized = true
             })
@@ -271,6 +273,7 @@ extension YTFViewController {
             let restrictY = initialFirstViewFrame!.size.height - playerView!.frame.size.height - 10
             
             if (self.tableView.frame.origin.y < restrictY && self.tableView.frame.origin.y > 0) {
+                
                 UIView.animate(withDuration: 0.09, delay: 0.0, options: UIViewAnimationOptions(), animations: {
                     self.playerView.frame = self.playerViewMinimizedFrame!
                     self.view.frame = self.viewMinimizedFrame!
@@ -278,6 +281,7 @@ extension YTFViewController {
                     let percentage = (yPlayerLocation + 200) / self.initialFirstViewFrame!.size.height
                     self.tableViewContainer.alpha = 1.0 - percentage
                     self.transparentView!.alpha = 1.0 - percentage
+                    self.input?.alpha = 0.0 + percentage
                     
                     }, completion: { finished in
                         if (self.panGestureDirection == UIPanGestureRecognizerDirection.down) {
@@ -341,7 +345,7 @@ extension YTFViewController {
             self.playerView.frame = CGRect(x: self.playerView!.frame.origin.x, y: self.playerView!.frame.origin.x, width: self.playerViewMinimizedFrame!.size.width, height: self.playerViewMinimizedFrame!.size.height)
             self.tableViewContainer!.alpha = 0.0
             self.playerView.alpha = 1.0
-            
+
             }, completion: nil)
         
         recognizer.setTranslation(CGPoint.zero, in: recognizer.view)
@@ -383,6 +387,7 @@ extension YTFViewController {
                 self.view.frame.size.height = self.playerView.frame.height
                 
             
+                self.input?.alpha = 1.0;
                 UIApplication.shared.setStatusBarHidden(false, with: .fade)
 
         })
@@ -395,6 +400,8 @@ extension YTFViewController {
             self.playerView.alpha = 1.0
             self.tableViewContainer.alpha = 1.0
             self.transparentView?.alpha = 1.0
+            self.input?.alpha = 0.0
+
             }, completion: { finished in
                 self.isMinimized = false
                 self.minimizeButton.isHidden = false

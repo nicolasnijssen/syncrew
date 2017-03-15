@@ -49,6 +49,8 @@ class YTFViewController: UIViewController {
     @IBOutlet weak var progressIndicatorView: UIActivityIndicatorView!
     var delegate: UITableViewDelegate?
     var dataSource: UITableViewDataSource?
+    var videoDelegate:NNVideoSocketDelegate?
+    var input:UIView?
     var tableCellNibName: String?
     var isOpen: Bool = false
     

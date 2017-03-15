@@ -44,8 +44,6 @@ class AccountManager: NSObject {
                 
                 print("Account id: \(account.id)")
                 self.account = account
-                    
-                
                 
             }
             

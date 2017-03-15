@@ -45,25 +45,6 @@ class SyncrewTests: XCTestCase {
 
     }
     
-    func addVideo(){
-        
-        let video = Video(title: "test video", thumbnail: "test", youtube: "test", playback: "")
-        
-        XCTAssertEqual(video.title, "test video")
-    }
-    
-    func testYoutubePlayer(){
-        
-        
-        let video = VideoViewController()
-        
-        let stream = video.stream
-        
-        stream.viewDidLoad()
-        
-        XCTAssertNotNil(stream.videos)
-        
-    }
     
     
     func testPostRoom(){

@@ -6,7 +6,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -23,55 +22,32 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IKK-Mw-uu2">
                         <rect key="frame" x="8" y="6" width="304" height="68"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fCU-qT-EoW">
-                                <rect key="frame" x="106" y="13" width="37" height="21"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                            <label autoresizesSubviews="NO" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ttitle" lineBreakMode="wordWrap" numberOfLines="0" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="304" translatesAutoresizingMaskIntoConstraints="NO" id="fCU-qT-EoW">
+                                <rect key="frame" x="20" y="13" width="37.5" height="42"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                 <color key="textColor" red="0.2196078431372549" green="0.23137254901960785" blue="0.28627450980392155" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Channel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kNz-SU-PhD">
-                                <rect key="frame" x="106" y="35" width="52" height="20"/>
-                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
-                                <color key="textColor" red="0.2196078431372549" green="0.23137254901960785" blue="0.28627450980392155" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
+                                <size key="shadowOffset" width="0.0" height="0.0"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="tintColor" red="0.40000000600000002" green="0.80000001190000003" blue="1" alpha="0.0" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="fCU-qT-EoW" firstAttribute="leading" secondItem="kNz-SU-PhD" secondAttribute="leading" id="9NU-Ks-IdD"/>
-                            <constraint firstItem="fCU-qT-EoW" firstAttribute="leading" secondItem="IKK-Mw-uu2" secondAttribute="leading" constant="106" id="Hjh-6m-aQ9"/>
+                            <constraint firstItem="fCU-qT-EoW" firstAttribute="leading" secondItem="IKK-Mw-uu2" secondAttribute="leading" constant="20" id="Hjh-6m-aQ9"/>
                             <constraint firstItem="fCU-qT-EoW" firstAttribute="top" secondItem="IKK-Mw-uu2" secondAttribute="topMargin" constant="5" id="LgU-CM-uDr"/>
-                            <constraint firstItem="kNz-SU-PhD" firstAttribute="top" secondItem="fCU-qT-EoW" secondAttribute="bottom" constant="1" id="bbk-Mo-aCR"/>
+                            <constraint firstItem="fCU-qT-EoW" firstAttribute="centerY" secondItem="IKK-Mw-uu2" secondAttribute="centerY" id="a9K-dI-QI3"/>
                         </constraints>
                     </view>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="yxe-Xn-mGp">
-                        <rect key="frame" x="10" y="8" width="86" height="62"/>
-                        <constraints>
-                            <constraint firstAttribute="width" secondItem="yxe-Xn-mGp" secondAttribute="height" multiplier="16:9" constant="-24.222222222222214" id="aA2-zp-xHs"/>
-                            <constraint firstAttribute="height" constant="62" id="bvd-18-0of"/>
-                        </constraints>
-                    </imageView>
                 </subviews>
                 <color key="backgroundColor" red="0.95686274509803915" green="0.96862745098039216" blue="0.98039215686274506" alpha="1" colorSpace="calibratedRGB"/>
                 <constraints>
-                    <constraint firstAttribute="bottom" secondItem="yxe-Xn-mGp" secondAttribute="bottom" constant="8" id="6ac-IE-yFv"/>
                     <constraint firstItem="IKK-Mw-uu2" firstAttribute="centerY" secondItem="mqR-cP-TwL" secondAttribute="centerY" id="Fc5-9z-CsK"/>
                     <constraint firstItem="IKK-Mw-uu2" firstAttribute="trailing" secondItem="mqR-cP-TwL" secondAttribute="trailingMargin" id="GDr-qn-Sjs"/>
                     <constraint firstItem="IKK-Mw-uu2" firstAttribute="top" secondItem="mqR-cP-TwL" secondAttribute="topMargin" constant="-2" id="GeJ-Zk-9s7"/>
-                    <constraint firstItem="yxe-Xn-mGp" firstAttribute="leading" secondItem="mqR-cP-TwL" secondAttribute="leading" constant="10" id="Jsv-Vk-PGb"/>
-                    <constraint firstItem="yxe-Xn-mGp" firstAttribute="top" secondItem="mqR-cP-TwL" secondAttribute="top" constant="8" id="krm-E9-9cz"/>
                     <constraint firstItem="IKK-Mw-uu2" firstAttribute="leading" secondItem="mqR-cP-TwL" secondAttribute="leadingMargin" id="vBK-dz-n9S"/>
                 </constraints>
-                <variation key="default">
-                    <mask key="constraints">
-                        <exclude reference="6ac-IE-yFv"/>
-                    </mask>
-                </variation>
             </tableViewCellContentView>
             <connections>
-                <outlet property="imageThumbnail" destination="yxe-Xn-mGp" id="o24-Ut-Ch9"/>
-                <outlet property="labelArtist" destination="kNz-SU-PhD" id="alt-aR-Nu0"/>
                 <outlet property="labelTitle" destination="fCU-qT-EoW" id="JTj-Xt-1bo"/>
             </connections>
             <point key="canvasLocation" x="243" y="377.5"/>

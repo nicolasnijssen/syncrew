@@ -11,22 +11,39 @@ import AVFoundation.AVPlayer
 
 extension YTFViewController {
     
-    @IBAction func playTouched(_ sender: AnyObject) {
+    @IBAction func playTouched(_ sender: AnyObject?) {
         if (isPlaying) {
             playerView.pause()
+            videoDelegate?.videoDidPause(time: playerView.currentTime)
         } else {
             playerView.play()
+            videoDelegate?.videoDidPlay(time: playerView.currentTime)
+
         }
         
     
+    }
+    
+    func changeState(state:String){
+        
+        if (state == "PAUSED") {
+            playerView.pause()
+            videoDelegate?.videoDidPause(time: playerView.currentTime)
+        } else {
+            playerView.play()
+            videoDelegate?.videoDidPlay(time: playerView.currentTime)
+            
+        }
     }
     
     
     @IBAction func fullScreenTouched(_ sender: AnyObject) {
         if (!isFullscreen) {
             setPlayerToFullscreen()
+            videoDelegate?.videoIsFullscreen()
         } else {
             setPlayerToNormalScreen()
+            videoDelegate?.videoIsNormalscreen()
         }
     }
     
@@ -36,8 +53,10 @@ extension YTFViewController {
     
     
     @IBAction func valueChangedSlider(_ sender: AnyObject) {
+        changeState(state:"PAUSED")
         playerView.currentTime = Double(slider.value)
-        playerView.play()
+        videoDelegate?.videoDidChangePlayTime(time: playerView.currentTime)
+       // playerView.play()
     }
     
     @IBAction func touchUpInsideSlider(_ sender: AnyObject) {
@@ -50,6 +69,17 @@ extension YTFViewController {
         progressIndicatorView.isHidden = false
         progressIndicatorView.startAnimating()
     }
+}
+
+public protocol NNVideoSocketDelegate {
+    
+    func videoDidPause(time:Double)
+    func videoDidPlay(time:Double)
+    func videoDidChangePlayTime(time:Double)
+    func videoIsFullscreen()
+    func videoIsNormalscreen()
+
+
 }
 
 extension YTFViewController: PlayerViewDelegate {
@@ -119,6 +149,8 @@ extension YTFViewController: PlayerViewDelegate {
             isPlaying = false
             play.setImage(UIImage(named: "play"), for: UIControlState())
         }
+        
+
     }
     
     func playerVideo(playerFinished player: PlayerView) {

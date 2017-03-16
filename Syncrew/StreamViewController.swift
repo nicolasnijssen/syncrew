@@ -50,6 +50,7 @@ class StreamViewController: UIViewController,UITableViewDelegate,UITableViewData
             YTFPlayer.playIndex(indexPath.row)
             videos.remove(at: indexPath.row)
             tableView.reloadData()
+            
 
         }
     }

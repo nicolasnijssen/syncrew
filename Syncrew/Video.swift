@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Alamofire
+import JAYSON
 
 class Video {
     var title: String
@@ -18,8 +20,31 @@ class Video {
         self.title = title
         self.youtube = youtube
         self.playback = playback
+     
+        pl()
+    }
+    
+
+    func pl(){
         
-        print("VIDEO PLAYBACK: \(self.playback)")
+        
+        let url = "https://helloacm.com/api/video/?cached&video=\(self.youtube)"
+        
+        Alamofire.request(url).responseJSON { response in
+                
+                
+            if let json = response.result.value {
+                
+                let jayson = try! JAYSON(any:json)
+                
+                print(jayson["url"].string!)
+                
+                self.playback = jayson["url"].string!
+            
+            }
+            
+        }
+        
 
     }
 }

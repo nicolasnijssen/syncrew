@@ -34,7 +34,12 @@ class AccountManager: NSObject {
     
     public func getAccountInfo(username:String){
         
-        Alamofire.request("https://syncrew-auth0.herokuapp.com/api/users/\(username)").responseJSON { response in
+        
+        let headers: HTTPHeaders = ["Authorization": AccountManager.getInstance().token]
+        
+        let url = "https://syncrew-auth0.herokuapp.com/api/users/\(username)"
+        
+        Alamofire.request(url,headers: headers).responseJSON { response in
             
             if let json = response.result.value {
                 

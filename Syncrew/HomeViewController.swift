@@ -99,7 +99,9 @@ class HomeViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
     
     func retrieveRooms(_ completed: @escaping DownloadComplete){
         
-        Alamofire.request("https://syncrew-auth0.herokuapp.com/api/rooms/").responseJSON { response in
+        let headers: HTTPHeaders = ["Authorization": AccountManager.getInstance().token]
+
+        Alamofire.request("https://syncrew-auth0.herokuapp.com/api/rooms/", headers:headers).responseJSON { response in
             
             if let json = response.result.value {
                 
@@ -108,7 +110,7 @@ class HomeViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
                 for var i in (0..<jayson.array!.count){
                     
                     
-                    let room:Room = Room(id: jayson[i]["roomId"].int!,name: jayson[i]["roomTitle"].string!, thumbnail: "", visibile: jayson[i]["visibility"].bool!,admin:2)
+                    let room:Room = Room(id: jayson[i]["roomId"].int!,name: jayson[i]["roomTitle"].string!, thumbnail: "", visibile: jayson[i]["visibility"].bool!,admin:jayson[i]["roomAdmin"]["userId"].int!)
                     
                     
                     for var j in (0..<jayson[i]["videoList"].array!.count){
@@ -131,9 +133,9 @@ class HomeViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
                         
                     } else {
                         
-                        if(room.admin == 2){
+                        if(room.admin == AccountManager.getInstance().account.id){
                             
-                            //AccountManager.getInstance().account.id
+                            
                              self.privRooms.append(room)
                         }
                     }
@@ -168,8 +170,7 @@ class HomeViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         label.heightAnchor.constraint(equalToConstant: 25).isActive = true
         
         return headerView
-
-        
+       
     }
  
  

@@ -37,6 +37,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
 
 
+        print(AccountManager.getInstance().account.name)
         self.username.text = AccountManager.getInstance().account.name
         
     }
@@ -77,5 +78,8 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
             break
         }
     }
+    
+    
+    
 
 }

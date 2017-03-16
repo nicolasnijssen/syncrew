@@ -45,6 +45,7 @@ class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         
         super.viewDidLoad()
         
+        getPlaying()
         self.title = self.room.name
         
         self.user = AccountManager.getInstance().account
@@ -214,6 +215,10 @@ class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
             self.youtube.playerView.currentTime = Double(time)!
             self.youtube.playerView.play()
             break
+        case "CHANGEVIDEO":
+            let index = getIndex(url: time)
+            self.youtube.playIndex(index)
+            break
         default:
             break
         }
@@ -221,6 +226,25 @@ class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
     }
     
     
+    func getIndex(url:String) -> Int{
+        
+        print("INDEX SEARCH \(url.components(separatedBy: ";")[0])")
+        for var i in (0..<room.videos.count){
+            
+            
+            if room.videos[i].youtube == url.components(separatedBy: ";")[0] {
+                
+                print("HIT \(i)")
+                return i
+            }
+            
+            
+        }
+        
+        
+        return 0
+        
+    }
     //add playback urls to url queue
     func retrieveUrls(_ completed: @escaping DownloadComplete){
         
@@ -237,6 +261,32 @@ class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         completed()
     }
     
+    
+    func getPlaying(){
+        
+        let headers: HTTPHeaders = ["Authorization": AccountManager.getInstance().token]
+
+        
+        let url = "https://syncrew-auth0.herokuapp.com/api/rooms/\(self.room.id)"
+        
+        Alamofire.request(url,headers:headers)
+            .responseJSON { response in
+                
+                
+                if let json = response.result.value {
+                    
+                    let jayson = try! JAYSON(any:json)
+                    
+                    
+                
+                    self.youtube.playIndex(self.getIndex(url: jayson["playingVideo"].dictionary!["url"]!.string!))
+
+                }
+                
+        }
+        
+    }
+    
     //send new message when send button is pushed
     @IBAction func sendNewMessage(){
         
@@ -245,7 +295,7 @@ class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         //use logged-in username
         let content = "{\"id\":\"\(self.room.id)\",\"content\":\"\(message)\",\"extra\":\"\(self.user.name)\"}"
         
-        print(content)
+        
         socket.sendMessage(message: content, toDestination: "/app/chat", withHeaders: ["content-length":"\(message.characters.count)"], withReceipt: "")
         
         self.inputTextField.text = ""
@@ -347,7 +397,10 @@ class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
     
     func isAdmin()->Bool{
         
-        if (self.room.admin ==  2){//self.user.id) {
+        print("ROOM ADMIN \(self.room.admin)")
+        print("login ADMIN \(self.user.id)")
+
+        if (self.room.admin ==  self.user.id){//self.user.id) {
             
             return true
         }

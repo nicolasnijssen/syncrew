@@ -131,6 +131,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate, UINavigationCo
             item.resignFirstResponder()
         }
         self.showLoading(state: true)
+        self.postRegister()
+
        
     }
     
@@ -159,6 +161,10 @@ class LoginViewController: UIViewController, UITextFieldDelegate, UINavigationCo
     //MARK: Viewcontroller lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.loginEmailField.text = "WillemHorsten"
+        self.loginPasswordField.text = "willem"
+        
         self.customization()
     }
     
@@ -178,7 +184,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate, UINavigationCo
     //check credentials
     func postLogin(username:String, password:String){
         
-        let parameters: Parameters = ["username": "RobinPauwels", "password":"robin"]
+        let parameters: Parameters = ["username": username, "password":password]
      
         let url = "https://syncrew-auth0.herokuapp.com/login"
         
@@ -188,14 +194,47 @@ class LoginViewController: UIViewController, UITextFieldDelegate, UINavigationCo
                 
                 if (response.response?.statusCode == 200){
                 
-                    AccountManager.getInstance().token = response.response?.allHeaderFields["Authorization"]! as! String
-                    AccountManager.getInstance().getAccountInfo(username:"RobinPauwels")
-                    
+                    let auth = response.response?.allHeaderFields["Authorization"]! as! String
+                    let token = auth.replacingOccurrences(of: "Bearer ", with: "")
+                    print(token)
+                    AccountManager.getInstance().token = token
+                    AccountManager.getInstance().getAccountInfo(username:username)
+    
                     self.pushToMainView()
+                }else{
+                    
+                    self.showLoading(state: false)
+                    
+                    let alert = UIAlertController(title: "Login credentals", message: "Login failed", preferredStyle: UIAlertControllerStyle.alert)
+                    alert.addAction(UIAlertAction(title: "Okay", style: UIAlertActionStyle.default, handler: nil))
+                    self.present(alert, animated: true, completion: nil)
                 }
                 
                 
             }
         
-          }
+    }
+    
+    
+    
+    //check credentials
+    func postRegister(){
+        
+        let parameters: Parameters = ["username":self.registerNameField.text!, "password":self.registerPasswordField.text!, "email":self.registerEmailField.text!]
+        
+        let url = "https://syncrew-auth0.herokuapp.com/api/users"
+        
+        Alamofire.request(url, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: [:])
+            .responseJSON { response in
+                
+                
+                if (response.response?.statusCode == 200){
+                    
+                    self.postLogin(username: self.registerNameField.text!, password: self.registerPasswordField.text!)
+                }
+                
+                
+        }
+        
+    }
 }

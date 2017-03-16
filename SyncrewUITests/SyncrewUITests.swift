@@ -34,7 +34,7 @@ class SyncrewUITests: XCTestCase {
         // Use recording to get started writing UI tests.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
         
-        testRoom()
+        tap()
     }
     
     
@@ -58,6 +58,13 @@ class SyncrewUITests: XCTestCase {
         
     }
     
+    func tap(){
+        
+        
+        XCUIApplication().otherElements["View"].tap()
+        
+        
+    }
     
     func testRoom(){
         

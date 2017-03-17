@@ -228,13 +228,10 @@ class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
     
     func getIndex(url:String) -> Int{
         
-        print("INDEX SEARCH \(url.components(separatedBy: ";")[0])")
         for var i in (0..<room.videos.count){
-            
             
             if room.videos[i].youtube == url.components(separatedBy: ";")[0] {
                 
-                print("HIT \(i)")
                 return i
             }
             
@@ -276,8 +273,6 @@ class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
                 if let json = response.result.value {
                     
                     let jayson = try! JAYSON(any:json)
-                    
-                    
                 
                     self.youtube.playIndex(self.getIndex(url: jayson["playingVideo"].dictionary!["url"]!.string!))
 
@@ -374,7 +369,7 @@ class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
 
             cell.backgroundColor = .clear
 
-            cell.message.text = message.messageText
+            cell.message.text = message.chatMessage
             
             
             return cell
@@ -397,10 +392,7 @@ class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
     
     func isAdmin()->Bool{
         
-        print("ROOM ADMIN \(self.room.admin)")
-        print("login ADMIN \(self.user.id)")
-
-        if (self.room.admin ==  self.user.id){//self.user.id) {
+        if (self.room.admin ==  self.user.id){
             
             return true
         }

@@ -12,10 +12,15 @@ class Message {
     
     var username:String
     var messageText:String
+    var chatMessage:String
     
     init(username:String, messageText:String) {
         
         self.username = username
         self.messageText = messageText
+        
+        self.chatMessage = "\(self.username):\n\(self.messageText)"
     }
+    
+    
 }

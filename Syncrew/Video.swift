@@ -16,16 +16,16 @@ class Video {
     var playback: String
 
     
-    init(title: String, youtube: String, playback:String) {
+    init(title: String, youtube: String) {
         self.title = title
         self.youtube = youtube
-        self.playback = playback
+        self.playback = ""
      
-        pl()
+        getPlayback()
     }
     
 
-    func pl(){
+    func getPlayback(){
         
         
         let url = "https://helloacm.com/api/video/?cached&video=\(self.youtube)"
@@ -36,9 +36,7 @@ class Video {
             if let json = response.result.value {
                 
                 let jayson = try! JAYSON(any:json)
-                
-                print(jayson["url"].string!)
-                
+                                
                 self.playback = jayson["url"].string!
             
             }

@@ -61,7 +61,6 @@ class SyncrewUITests: XCTestCase {
     func tap(){
         
         
-        XCUIApplication().otherElements["View"].tap()
         
         
     }

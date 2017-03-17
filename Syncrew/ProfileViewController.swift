@@ -15,7 +15,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     @IBOutlet weak var username:UILabel!
     
     
-    var titles = ["My Rooms"]
+    var titles = ["Log out"]
     
     
     override func viewDidLoad() {
@@ -68,15 +68,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
        
-        switch indexPath.row {
-        case 0:
-            let vc = self.storyboard?.instantiateViewController(withIdentifier: "MyRooms") as! ProfileRoomViewController
-            self.show(vc, sender: nil)
-            
-            break
-        default:
-            break
-        }
+        
     }
     
     

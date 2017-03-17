@@ -11,9 +11,10 @@ class HomeViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
     @IBOutlet weak var loadingView: UIView!
 
     var headers = ["Public","Private"]
+    var popRooms = ["Random room","Sport room","News room"]
 
     var guttlerPageControl: GuttlerPageControl!
-    let numOfpage = 7
+    let numOfpage = 3
 
     var pubRooms:Array<Room> = Array<Room>()
     var privRooms:Array<Room> = Array<Room>()
@@ -66,6 +67,24 @@ class HomeViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         for i in 0..<numOfpage {
             let subview = UIView(frame: CGRect(x: pageSize * CGFloat(i), y: 0, width: pageSize, height: scrollView.frame.height))
             subview.backgroundColor = randomColor(hue: .blue, luminosity: .bright)
+            
+            let cellLabel = UILabel(frame: CGRect(x: 0, y: (scrollView.frame.height / 2) - 20 , width:subview.frame.width , height: 40))
+            
+            cellLabel.adjustsFontSizeToFitWidth = true
+            cellLabel.font = UIFont(name: "AvenirNext-Regular", size: 21)!
+            cellLabel.textColor = .white
+            cellLabel.textAlignment = .center
+            
+            if i == 0 {
+                
+                cellLabel.text = "Welcome" // \(AccountManager.getInstance().account.name)"
+
+            }else {
+                cellLabel.text = self.popRooms[i]
+
+            }
+            subview.addSubview(cellLabel)
+
             scrollView.addSubview(subview)
         }
         
@@ -117,7 +136,7 @@ class HomeViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
                         
                         
                       
-                        let video:Video = Video(title: jayson[i]["videoList"][j]["title"].string!, youtube: jayson[i]["videoList"][j]["url"].string!, playback: "https://redirector.googlevideo.com/videoplayback?mime=video%2Fmp4&pl=33&expire=1489593525&ipbits=0&beids=%5B9466593%5D&key=yt6&lmt=1474374983720626&source=youtube&ratebypass=yes&dur=342.494&signature=6153614DBA1A964DEB41403E405E366172609949.B13C5EE73D09D43AE6724C463F811DFABBFC253A&ip=2600%3A3c01%3A%3Af03c%3A91ff%3Afe24%3Ab564&requiressl=yes&sparams=dur%2Cei%2Cid%2Cinitcwndbps%2Cip%2Cipbits%2Citag%2Clmt%2Cmime%2Cmm%2Cmn%2Cms%2Cmv%2Cpcm2%2Cpl%2Cratebypass%2Crequiressl%2Csource%2Cupn%2Cexpire&id=o-AE3yuRZx8DRfP_cF9BRHcCtUL9e0XRFlWXPz--cASy6w&initcwndbps=7568750&mm=31&mn=sn-n4v7sn7y&upn=17xCGttPyww&pcm2=no&ei=VRDJWIjXEIzI-APwuIzICg&itag=22&ms=au&mt=1489571843&mv=m")
+                        let video:Video = Video(title: jayson[i]["videoList"][j]["title"].string!, youtube: jayson[i]["videoList"][j]["url"].string!)
                             
                         room.addVideo(video: video)
 
@@ -296,6 +315,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         }
         self.show(vc, sender: nil)
     }
+    
     
     
     

@@ -24,50 +24,6 @@ class SyncrewTests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
     }
-    
-    func testApiRequest(){
-        
-        let expected_title = "I've Never Seen Anything Like It..."
-        
-        Alamofire.request("http://127.0.0.1:8000/api/videos/\(1)").responseJSON { response in
-            
-            if let json = response.result.value {
-                
-                let jayson = try! JAYSON(any: json)
-                
-                
-                XCTAssertNotNil(json)
-                
-                XCTAssertEqual(expected_title, jayson[0]["title"].string!)
-                
-            }
-        }
 
-    }
-    
-    
-    
-    func testPostRoom(){
-        
-        let name = "TestRoom"
-        let parameters: Parameters = ["name": name, "thumbnail":"htttp://iets","room_type":"PUBLIC"]
-        
-        // All three of these calls are equivalent
-        Alamofire.request("http://127.0.0.1:8000/api/rooms/add",method: HTTPMethod.post, parameters: parameters).responseJSON{
-            
-            response in
-            
-            if let json  = response.result.value {
-                
-                let jayson = try! JAYSON(any: json)
-
-                XCTAssertEqual(name, jayson[0]["name"].string!)
-
-            }
-            
-
-        }
-        
-    }
     
 }

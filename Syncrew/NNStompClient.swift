@@ -120,7 +120,6 @@ public class NNStompClient: NSObject, WebSocketDelegate {
 
     
     public func websocketDidReceiveMessage(socket: WebSocket, text: String) {
-        print("MESSAGE RECEIVED \(text)")
 
         func processString(string: String) {
             var contents = string.components(separatedBy: "\n")
@@ -167,6 +166,7 @@ public class NNStompClient: NSObject, WebSocketDelegate {
     public func websocketDidDisconnect(socket: WebSocket, error: NSError?) {
      
         print("didCloseWithCode \(error?.code), reason: \(error?.description)")
+    
         if let delegate = delegate {
             DispatchQueue.main.async(execute: {
                 delegate.stompClientDidDisconnect(client: self)

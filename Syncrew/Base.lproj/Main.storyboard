@@ -83,7 +83,7 @@
                         <color key="backgroundColor" red="0.1960784314" green="0.60392156860000001" blue="0.93725490199999995" alpha="1" colorSpace="calibratedRGB"/>
                         <accessibility key="accessibilityConfiguration" hint="View" identifier="View" label="View">
                             <accessibilityTraits key="traits" notEnabled="YES"/>
-                            <bool key="isElement" value="YES"/>
+                            <bool key="isElement" value="NO"/>
                         </accessibility>
                         <constraints>
                             <constraint firstItem="KNK-zk-Fdk" firstAttribute="leading" secondItem="DXs-3v-ClZ" secondAttribute="leading" id="9PR-YG-K0Q"/>
@@ -451,7 +451,8 @@
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <accessibility key="accessibilityConfiguration" identifier="Login" label="Login">
-                        <bool key="isElement" value="YES"/>
+                        <accessibilityTraits key="traits" notEnabled="YES"/>
+                        <bool key="isElement" value="NO"/>
                     </accessibility>
                     <constraints>
                         <constraint firstItem="BkQ-hz-vts" firstAttribute="centerX" secondItem="qNv-sP-z8b" secondAttribute="centerX" id="5rF-Gk-0M5"/>

@@ -4,38 +4,38 @@ import JAYSON
 import ChameleonFramework
 
 class HomeViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
-
+    
     
     @IBOutlet weak var tableview:UITableView!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var loadingView: UIView!
-
+    
     var headers = ["Public","Private"]
     var popRooms = ["Random room","Sport room","News room"]
-
+    
     var guttlerPageControl: GuttlerPageControl!
     let numOfpage = 3
-
+    
     var pubRooms:Array<Room> = Array<Room>()
     var privRooms:Array<Room> = Array<Room>()
     
     var playback = [String]()
-
+    
     
     override func viewDidLoad() {
         
         super.viewDidLoad()
         
-
+        
         self.title = "Syncrew"
         
-    
+        
         //NavigationBar customization
         let navigationTitleFont = UIFont(name: "AvenirNext-Regular", size: 18)!
         self.navigationController?.navigationBar.titleTextAttributes = [NSFontAttributeName: navigationTitleFont, NSForegroundColorAttributeName: UIColor.white]
         
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-
+        
         
         //Right bar button item
         let rightBtn = UIButton(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
@@ -52,7 +52,7 @@ class HomeViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         //Background TableView settings
         self.tableview.backgroundColor = UIColor(hexString: Constants.themeColor2)
         self.tableview.separatorStyle = UITableViewCellSeparatorStyle.none
-
+        
         
         //Page control
         let pageSize = self.scrollView.frame.width
@@ -77,14 +77,14 @@ class HomeViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
             
             if i == 0 {
                 
-                cellLabel.text = "Welcome" // \(AccountManager.getInstance().account.name)"
-
+                cellLabel.text = "Welcome"
+                
             }else {
                 cellLabel.text = self.popRooms[i]
-
+                
             }
             subview.addSubview(cellLabel)
-
+            
             scrollView.addSubview(subview)
         }
         
@@ -93,9 +93,9 @@ class HomeViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         guttlerPageControl = GuttlerPageControl(center: CGPoint(x: self.scrollView.center.x, y: self.scrollView.center.y+110), pages: numOfpage)
         guttlerPageControl.bindScrollView = scrollView
         view.addSubview(guttlerPageControl)
-
         
-
+        
+        
         
     }
     
@@ -109,17 +109,17 @@ class HomeViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
             self.hideLoading()
             self.tableview.reloadData()
         }
-
+        
     }
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         guttlerPageControl.scrollWithScrollView(scrollView)
     }
-
+    
     
     func retrieveRooms(_ completed: @escaping DownloadComplete){
         
         let headers: HTTPHeaders = ["Authorization": AccountManager.getInstance().token]
-
+        
         Alamofire.request("https://syncrew-auth0.herokuapp.com/api/rooms/", headers:headers).responseJSON { response in
             
             if let json = response.result.value {
@@ -135,17 +135,17 @@ class HomeViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
                     for var j in (0..<jayson[i]["videoList"].array!.count){
                         
                         
-                      
-                        let video:Video = Video(title: jayson[i]["videoList"][j]["title"].string!, youtube: jayson[i]["videoList"][j]["url"].string!)
-                            
-                        room.addVideo(video: video)
-
                         
-                        completed()                      
-                       
- 
+                        let video:Video = Video(title: jayson[i]["videoList"][j]["title"].string!, youtube: jayson[i]["videoList"][j]["url"].string!)
+                        
+                        room.addVideo(video: video)
+                        
+                        
+                        completed()
+                        
+                        
                     }
-                
+                    
                     if(room.visibile){
                         
                         self.pubRooms.append(room)
@@ -155,7 +155,7 @@ class HomeViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
                         if(room.admin == AccountManager.getInstance().account.id){
                             
                             
-                             self.privRooms.append(room)
+                            self.privRooms.append(room)
                         }
                     }
                 }
@@ -168,7 +168,7 @@ class HomeViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
     }
     
     
-  
+    
     // TABLEVIEW METHODS
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
@@ -189,10 +189,10 @@ class HomeViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         label.heightAnchor.constraint(equalToConstant: 25).isActive = true
         
         return headerView
-       
+        
     }
- 
- 
+    
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         return headers.count
         
@@ -205,32 +205,32 @@ class HomeViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return headers[section]
     }
-   
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         return 1
     }
-
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-
+        
         cell.backgroundColor = UIColor(hexString: Constants.themeColor2)
         return cell
     }
-
+    
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-
+        
         guard let tableViewCell = cell as? TableViewCell else { return }
-
-
+        
+        
         tableViewCell.setCollectionViewDataSourceDelegate(self, forRow: indexPath.section)
     }
-
+    
     func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-
+        
         guard let tableViewCell = cell as? TableViewCell else { return }
-
+        
         tableViewCell.backgroundColor = UIColor(hexString: Constants.themeColor2)
     }
     
@@ -251,7 +251,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             return self.privRooms.count
         }
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath)
@@ -261,7 +261,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         let cellView = UIView(frame: CGRect(x: 0, y: 0, width: 98, height: 68))
         let cellLabel = UILabel(frame: CGRect(x: 0, y: 14, width:cellView.frame.width , height: 40))
         cellView.backgroundColor = UIColor.randomBackColor()
-
+        
         cellLabel.adjustsFontSizeToFitWidth = true
         cellLabel.font = UIFont(name: "AvenirNext-Regular", size: 16)!
         cellLabel.textColor = .white
@@ -276,29 +276,29 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
                 
                 if(self.pubRooms.count > indexPath.row){
                     
-                    cellLabel.text = self.pubRooms[indexPath.row].name    
+                    cellLabel.text = self.pubRooms[indexPath.row].name
                     cell.addSubview(cellView)
                 }
-
+                
             }
             
         }else if(collectionView.tag == 1){
             
-                if(self.privRooms.count > 0){
+            if(self.privRooms.count > 0){
                 
-                    if(self.privRooms.count > indexPath.row){
-                
-                        cellLabel.text = self.privRooms[indexPath.row].name
-                        cell.addSubview(cellView)
-                    }
+                if(self.privRooms.count > indexPath.row){
+                    
+                    cellLabel.text = self.privRooms[indexPath.row].name
+                    cell.addSubview(cellView)
+                }
             }
         }
-    
         
-
+        
+        
         return cell
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         
@@ -323,9 +323,9 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     func showProfile(){
         
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "Profile") as! ProfileViewController
-
+        
         self.show(vc, sender: nil)
-
+        
     }
     
     func hideLoading(){

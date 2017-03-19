@@ -108,7 +108,6 @@ class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
     
     func stompClientDidConnect(client: NNStompClient!) {
         
-        print("CONNECTED")
         self.socket.subscribeToDestination(destination: "/topic/syncmessages", withHeader: ["id": "sub-0"])
         self.socket.subscribeToDestination(destination: "/topic/chatmessages", withHeader: ["id": "sub-0"])
 
@@ -116,7 +115,11 @@ class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
     
     func stompClientDidDisconnect(client: NNStompClient!) {
         
+        let alert = UIAlertController(title: "Websocket Disconnected", message: "Websocket lost connection, re-enter the room to reconnect", preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: "Okay", style: UIAlertActionStyle.default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
         
+       
     }
     
     func stompClientWillDisconnect(client: NNStompClient!, withError error: NSError) {
@@ -125,8 +128,6 @@ class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
     
     func stompClient(client: NNStompClient!, didReceiveMessageWithJSONBody jsonBody: AnyObject?, withHeader header: [String : String]?, withDestination destination: String) {
         
-        print("Jayson body \(jsonBody)")
-        print("Destination \(destination)")
         let jayson = try! JAYSON(any:jsonBody!)
 
         //check message destination
@@ -155,7 +156,6 @@ class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
     
     func serverDidSendPing() {
      
-        print("PING RECEIVED")
     }
     
     
@@ -164,7 +164,6 @@ class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
     //VIDEO METHODS
     func videoDidPlay(time: Double) {
         
-        print("VIDEO PLAY")
         
         //use logged-in username
         let content = "{\"id\":\"\(room.id)\",\"content\":\"PLAYING\",\"extra\":\"\(time)\"}"
@@ -174,7 +173,6 @@ class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
     
     func videoDidPause(time: Double) {
      
-        print("VIDEO PAUSE")
         //use logged-in username
         let content = "{\"id\":\"\(room.id)\",\"content\":\"PAUSED\",\"extra\":\"\(time)\"}"
         
@@ -184,7 +182,6 @@ class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
     
     func videoDidChangePlayTime(time: Double) {
         
-        print("VIDEO CHANGE TIME")
 
     }
     
@@ -252,8 +249,6 @@ class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
             
             
         }
-        
-        
         
         completed()
     }
@@ -359,6 +354,7 @@ class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
             
             cell.message.text = message.messageText
             
+            socket.disconnect()
             return cell
             
         }else {
@@ -390,6 +386,7 @@ class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
     }
     
     
+    //check if logged in user is admin of room
     func isAdmin()->Bool{
         
         if (self.room.admin ==  self.user.id){

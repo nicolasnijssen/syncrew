@@ -194,10 +194,16 @@ class YTFViewController: UIViewController {
         return UIInterfaceOrientationMask.portrait
     }
     
+    
+    override var preferredStatusBarUpdateAnimation: UIStatusBarAnimation {
+        return UIStatusBarAnimation.slide
+    }
+    
+    
     override var prefersStatusBarHidden: Bool {
         return true
     }
-    
+ 
     
     
 }

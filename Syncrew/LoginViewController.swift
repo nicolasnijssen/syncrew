@@ -72,6 +72,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate, UINavigationCo
     }
    
     
+    //simple cloud animation
     func animateClouds() {
         let distance = self.view.bounds.width - self.cloudsView.bounds.width
         self.cloudsViewLeading.constant = distance
@@ -166,6 +167,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate, UINavigationCo
         self.loginPasswordField.text = "willem"
         
         self.customization()
+        
+        print("ACCESS ?: \(loginEmailField.isAccessibilityElement)")
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -217,7 +220,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate, UINavigationCo
     
     
     
-    //check credentials
+    //register account
     func postRegister(){
         
         let parameters: Parameters = ["username":self.registerNameField.text!, "password":self.registerPasswordField.text!, "email":self.registerEmailField.text!]

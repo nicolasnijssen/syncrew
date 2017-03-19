@@ -388,8 +388,7 @@ extension YTFViewController {
                 
             
                 self.input?.alpha = 1.0;
-                UIApplication.shared.setStatusBarHidden(false, with: .fade)
-
+                
         })
     }
     
@@ -440,5 +439,5 @@ extension YTFViewController {
         
         YTFPlayer.finishYTFView(true)
     }
-    
+  
 }

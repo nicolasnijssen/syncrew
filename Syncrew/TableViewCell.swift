@@ -2,7 +2,7 @@ import UIKit
 
 class TableViewCell: UITableViewCell {
 
-    @IBOutlet fileprivate weak var collectionView: UICollectionView!
+    @IBOutlet weak var collectionView: UICollectionView!
 
     func setCollectionViewDataSourceDelegate<D: UICollectionViewDataSource & UICollectionViewDelegate>(_ dataSourceDelegate: D, forRow row: Int) {
         

@@ -11,7 +11,6 @@
 		60EE316619E25FDD36324C5D /* Pods_SyncrewUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FE7E22ED697ACBB6A1782BA /* Pods_SyncrewUITests.framework */; };
 		6D0C22A91E6D6C86005D1958 /* AccountManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D0C22A81E6D6C86005D1958 /* AccountManager.swift */; };
 		6D0C22AB1E6D6CD0005D1958 /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D0C22AA1E6D6CD0005D1958 /* Account.swift */; };
-		6D12BB961E4B122C00C5BF04 /* YTPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D12BB951E4B122C00C5BF04 /* YTPlayerView.m */; };
 		6D12BBA51E4B181F00C5BF04 /* CustomProgressSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D12BB9E1E4B181F00C5BF04 /* CustomProgressSlider.swift */; };
 		6D12BBA61E4B181F00C5BF04 /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D12BB9F1E4B181F00C5BF04 /* PlayerView.swift */; };
 		6D12BBA71E4B181F00C5BF04 /* YTFAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D12BBA01E4B181F00C5BF04 /* YTFAnimation.swift */; };
@@ -88,8 +87,6 @@
 		6D0C22A81E6D6C86005D1958 /* AccountManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountManager.swift; sourceTree = "<group>"; };
 		6D0C22AA1E6D6CD0005D1958 /* Account.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
 		6D12BB931E4B122B00C5BF04 /* Syncrew-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Syncrew-Bridging-Header.h"; sourceTree = "<group>"; };
-		6D12BB941E4B122C00C5BF04 /* YTPlayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTPlayerView.h; sourceTree = "<group>"; };
-		6D12BB951E4B122C00C5BF04 /* YTPlayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTPlayerView.m; sourceTree = "<group>"; };
 		6D12BB9E1E4B181F00C5BF04 /* CustomProgressSlider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomProgressSlider.swift; sourceTree = "<group>"; };
 		6D12BB9F1E4B181F00C5BF04 /* PlayerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
 		6D12BBA01E4B181F00C5BF04 /* YTFAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YTFAnimation.swift; sourceTree = "<group>"; };
@@ -322,8 +319,6 @@
 		6D376F471E55F739009D4CA5 /* Video */ = {
 			isa = PBXGroup;
 			children = (
-				6D12BB941E4B122C00C5BF04 /* YTPlayerView.h */,
-				6D12BB951E4B122C00C5BF04 /* YTPlayerView.m */,
 				6D376F441E549B70009D4CA5 /* StreamViewController.swift */,
 				6D12BBC61E4B184F00C5BF04 /* VideoCell.swift */,
 				6D12BBC71E4B184F00C5BF04 /* VideoCell.xib */,
@@ -716,7 +711,6 @@
 				6D12BBAB1E4B181F00C5BF04 /* YTFViewController.swift in Sources */,
 				6D12BBA81E4B181F00C5BF04 /* YTFPlayer.swift in Sources */,
 				6D3B88831E7066DD00ACD07F /* ChatViewController.swift in Sources */,
-				6D12BB961E4B122C00C5BF04 /* YTPlayerView.m in Sources */,
 				6D3DCC611E53A50700A0D5C7 /* Helper Files.swift in Sources */,
 				6D376F4A1E572F02009D4CA5 /* ProfileViewController.swift in Sources */,
 				6D1F03431E4367760090D085 /* AppDelegate.swift in Sources */,
